@@ -1,0 +1,44 @@
+*
+{
+    margin: 0%;
+    padding: 0%;
+}
+
+.Login-container
+{
+    max-height: 1900 px;
+    height: 46em;
+    background-image: url(../Images/794cb8f4b28f8028b5e065a6e2ea310c.jpg);
+}
+
+.home-ft-height
+{
+    height: 1.5rem;
+
+}
+
+.navbar-color
+{
+    background: #de5285;
+}
+
+.Login-row
+{
+    background-color: #ffc0cb;
+    height: 30em;
+    border :#de5285 3px solid;
+}
+
+.login-label
+{
+    color :#c84186;
+    font-family: cursive;
+}
+
+.table-container
+{
+    background-color: white;
+    /* background-image: url(../Images/summer-nature-wallpaper-3_edited.png); */
+    min-height: 660px;
+}
+

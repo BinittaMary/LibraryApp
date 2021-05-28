@@ -1,0 +1,17 @@
+{
+  "name": "libraryapp",
+  "version": "1.0.0",
+  "description": "library application on express and node",
+  "main": "index.js",
+  "scripts": {
+    "start" : "node.app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Binitta Chandy",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "multer": "^1.4.2"
+  }
+}
