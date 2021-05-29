@@ -51,7 +51,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-7">
-        <h1>Login
+        <h1>Add Book
           <p class="lead"></p>
         </h1>
       </div>
@@ -90,29 +90,34 @@
           <div class="row Login-container p-2  " >
             <div class="col-lg-4"></div>
             <!-- sign in form -->
-            <div class="col-lg-4  p-5 m-3 Login-row rounded">
+            <div class="col-lg-4  p-5 m-3 addPage-row rounded">
 
 
-              <form class="row mt-5 " id ="LoginForm" method="POST" onsubmit="return validateLoginData()" action='/login/validate'>
-                <%if (login.loginError) {%>
-                  <span id="LoginAlertMsg"><div style ='color:#ed2939;  padding:5px; '><p><%=login.loginErrMessage%></p> </span> 
-                <%} else {%>
-                  <span id="LoginAlertMsg"></span> 
-                  <%}%>
-                <span id="LoginAlertMsg"></span> 
+              <form class="row mt-5 " id ="AddAuthorForm" method="POST" onsubmit="return validateAddAuthorData() " enctype=  "multipart/form-data" action="/addauthor/add" >
+                <span id="AddAuthorAlertMsg"></span> 
                 <div class="form-group p-5 col-md-12 ">
                   <br>
-                  <label for="LoginUserNameLabel" class="form-label login-label ">User Name</label>
-                  <span id="LoginUserNameSpan"></span>
-                  <input type="text" class="form-control"  id="LoginUserName" name="username" placeholder="Enter the User Name">
+                  <label for="AddAuthorName" class="form-label addPage-label ">Name&nbsp;<strong style="color: red;">*</strong></label>
+                  <span id="AddAuthorNameSpan"></span>
+                  <input type="text" class="form-control"  id="AddAuthorName" name='name' placeholder="Enter the Author Name">
+                </div>                
+                <div class="form-group p-5 col-md-12 ">
+                  <label for="AddAuthorNationality" class="form-label addPage-label ">Nationality&nbsp;<strong style="color: red;">*</strong></label>
+                  <span id="AddAuthorNationalitySpan"></span>
+                  <input type="text" class="form-control"  id="AddAuthorNationality" name='nationality' placeholder="Enter the Nationality">
                 </div>
-                <div class="form-group col-md-12 p-3">
-                  <label for="inputPassword4" class="form-label login-label">Password</label>
-                  <span id="LoginPasswordSpan"></span>
-                  <input type="password" class="form-control" id="LoginPassword" name="password" placeholder="Enter the Password" >
-                </div>
+                <div class="form-group p-5 col-md-12 ">
+                  <label for="AddAuthorGenre" class="form-label addPage-label ">Genre&nbsp;<strong style="color: red;">*</strong></label>
+                  <span id="AddAuthorGenreSpan"></span>
+                  <input type="text" class="form-control"  id="AddAuthorGenre" name='genre' placeholder="Enter the Genre">
+                </div>                
+                <div class="form-group p-5 col-md-12 ">
+                  <label for="AddAuthorImage" class="form-label addPage-label ">Image&nbsp;<strong style="color: red;">*</strong></label>
+                  <span id="AddAuthorAddBookImageSpan"></span>
+                  <input type="file" class="form-control" id="AddAuthorImage" name='image' />
+                </div>                                 
                 <div class="form-group col-md-11 d-grid p-3 text-center">
-                <button type="submit" class="btn btn-primary ">Submit</button>
+                <button type="submit" class="btn btn-primary ">Add Author</button>
               </div>
               </div>
               </form>

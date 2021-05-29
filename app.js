@@ -11,11 +11,14 @@ const nav = [
     link :'/login',name :'Login'
   },  
   {
-    link :'/signup',name :'Sign  Up'
+    link :'/signup',name :'Sign Up'
   },
   {
     link :'/addbook',name :'Add Book'
-  },
+  },  
+  {
+    link :'/addauthor',name :'Add Author'
+  }
   ];
 
   let books = [
@@ -39,14 +42,60 @@ const nav = [
     }
 ];
 
+let authors = [
+  {
+      authorname : 'Chetan Prakash Bhagat',
+      nationality : 'Indian',
+      works :'Five Point Someone, 2 States: The Story of My Marriage, The 3 Mistakes of My Life, Half Girlfriend',
+      img   :'Chetan_Bhagat.jpg'
+  },
+  {
+      authorname : 'Paulo Coelho',
+      nationality : 'Brazilian',
+      works :'The Alchemist, The Pilgrimage, Eleven Minutes, The Devil and Miss Prym',
+      img   :'Coelhopaulo.jpg'
+  },
+  {
+      authorname : 'Joanne Rowling',
+      nationality : 'British',
+      works :'Harry Potter series, Cormoran Strike series',
+      img   :'J._K._Rowling.jpg'
+  },
+];
+
+
+let login =  
+  {
+    loginError : false,
+    loginErrMessage : ''
+  };
+
+let users =[
+  {
+    username : 'admin',
+    password : '12345',
+    emailaddress : 'admin@lib.com'
+  },
+  {
+    username : 'binitta',
+    password : '12345',
+    emailaddress : 'binittamary.chandy@gmail.com'
+  }
+];
+
+
 
 const booksRouter = require('./src/routes/bookRoutes')(nav, books);
 
-const authorsRouter = require('./src/routes/authorRoutes')(nav);
+const authorsRouter = require('./src/routes/authorRoutes')(nav, authors);
 
-const loginRouter = require('./src/routes/loginRoutes')(nav);
+const loginRouter = require('./src/routes/loginRoutes')(nav, users, login);
 
 const addBookRouter = require('./src/routes/addBookRoutes')(nav, books);
+
+const addAuthorRouter = require('./src/routes/addAuthorRoutes')(nav, authors);
+
+const signupRouter = require('./src/routes/signupRoutes')(nav, users);
 
 const app = new express();
 
@@ -62,10 +111,14 @@ app.use(express.static('./public'));
 app.use('/books',booksRouter);
 //*** router for authors */
 app.use('/authors',authorsRouter);
-//*** router for authors */
+//*** router for login */
 app.use('/login',loginRouter);
-//*** router for authors */
-app.use('/addbook',addBookRouter);
+//*** router for signup */
+app.use('/signup',signupRouter);
+//*** router for addbook */
+app.use('/addbook', addBookRouter);
+//*** router for addAuthor */
+app.use('/addauthor', addAuthorRouter);
 
 app.get('/', function(req,res)
 {
@@ -75,13 +128,6 @@ app.get('/', function(req,res)
     });
 });
 
-app.get('/signup', function(req,res)
-{
-    res.render('signup', {
-      nav , 
-      title : 'Library'  
-    });
-});
 
 
 
