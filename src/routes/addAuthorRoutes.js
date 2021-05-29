@@ -9,7 +9,7 @@ function router(nav, authors)
 {
 
     addAuthorRouter.get('/', function(req,res){
-        res.render('addauthor', {
+        res.render('addAuthor', {
             nav,
             title : 'Library' 
         });  
