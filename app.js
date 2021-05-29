@@ -74,12 +74,14 @@ let users =[
   {
     username : 'admin',
     password : '12345',
-    emailaddress : 'admin@lib.com'
+    emailaddress : 'admin@lib.com',
+    phoneno  : 1234567890
   },
   {
-    username : 'binitta',
-    password : '12345',
-    emailaddress : 'binittamary.chandy@gmail.com'
+    username : 'abc',
+    password : '123',
+    emailaddress : 'abc@gmail.com',
+    phoneno  : 1234567890
   }
 ];
 
