@@ -130,7 +130,7 @@ const booksRouter = require('./src/routes/bookRoutes')(nav, books);
 
 const authorsRouter = require('./src/routes/authorRoutes')(nav, authors);
 
-const loginRouter = require('./src/routes/loginRoutes')(nav, users, login);
+const loginRouter = require('./src/routes/loginRoutes')(nav, users, login, newbooks );
 
 const addBookRouter = require('./src/routes/addBookRoutes')(nav, books, newbooks);
 

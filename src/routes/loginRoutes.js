@@ -1,7 +1,7 @@
 const express = require('express');
 
 const loginRouter= express.Router();
-function router(nav, users, login)
+function router(nav, users, login, newbooks)
 {
     loginRouter.get('/', function(req,res)
     {
@@ -32,7 +32,8 @@ function router(nav, users, login)
             console.log(`login successful`);
             res.render('index', {
               nav , 
-              title : 'Library',                
+              title : 'Library', 
+              newbooks               
             });
           }
         else 
