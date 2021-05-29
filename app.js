@@ -39,7 +39,34 @@ const nav = [
         author : 'Chetan Bhagat',
         genre :'Fantasy',
         img   :'Five_Point_Someone-What_not_to_do_at_IIT.jpg'
-    }
+    },
+    {
+      title  : 'One Arranged Murder',
+      author : 'Chetan Bhagat',
+      genre  : 'Mystery, Thriller',
+      img    : 'One_Arranged_Murder.jpg'
+  },
+  {
+    title  : 'Fifty Shades of Grey',
+    author : 'E. L. James',
+    genre  : 'romance',
+    img    : 'ShadesofGreyCoverArt.jpg'
+}
+];
+
+let newbooks = [
+  {
+      title  : 'One Arranged Murder',
+      author : 'Chetan Bhagat',
+      genre  : 'Mystery, Thriller',
+      img    : 'One_Arranged_Murder.jpg'
+  },
+  {
+    title  : 'Fifty Shades of Grey',
+    author : 'E. L. James',
+    genre  : 'romance',
+    img    : 'ShadesofGreyCoverArt.jpg'
+}
 ];
 
 let authors = [
@@ -61,6 +88,12 @@ let authors = [
       works :'Harry Potter series, Cormoran Strike series',
       img   :'J._K._Rowling.jpg'
   },
+  {
+    authorname : 'E. L. James',
+    nationality : 'England',
+    works :'Fifty Shades of Grey, Fifty Shades Darker,Fifty Shades Freed,Book Club',
+    img   :'E._L._James.jpg'
+},
 ];
 
 
@@ -99,7 +132,7 @@ const authorsRouter = require('./src/routes/authorRoutes')(nav, authors);
 
 const loginRouter = require('./src/routes/loginRoutes')(nav, users, login);
 
-const addBookRouter = require('./src/routes/addBookRoutes')(nav, books);
+const addBookRouter = require('./src/routes/addBookRoutes')(nav, books, newbooks);
 
 const addAuthorRouter = require('./src/routes/addAuthorRoutes')(nav, authors);
 
@@ -132,7 +165,8 @@ app.get('/', function(req,res)
 {
     res.render('index', {
       nav , 
-      title : 'Library'  
+      title : 'Library' ,
+      newbooks 
     });
 });
 

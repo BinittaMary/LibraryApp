@@ -51,12 +51,12 @@
   <div class="container">
     <div class="row">
       <div class="col-md-7">
-        <h1>Add Book
+        <h1>Add Author
           <p class="lead"></p>
         </h1>
       </div>
       <div class="col-md-5">
-        <div class="well well-lg"> 
+        <!-- <div class="well well-lg">  -->
           <div class="row">
             <div class="col-sm-12">
               
@@ -71,26 +71,26 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <div class="top-spacer"> </div>
+        <!-- <div class="top-spacer"> </div> -->
       </div>
     </div> 
   </div><!-- /cont -->
   
 </div>
+<br>
 
-
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     
     <div class="col-md-12"> 
       
-      <div class="panel">
+      <div class="panel"  style="background-image: url(../images/lib_image2.jpg)">
         <div class="panel-body">
           
           <div class="row Login-container p-2  " >
             <div class="col-lg-4"></div>
             <!-- sign in form -->
-            <div class="col-lg-4  p-5 m-3 addPage-row rounded">
+            <div class="col-lg-4  p-5 m-3 addPage-row rounded" style="background-color : #C5CAE9; border">
 
 
               <form class="row mt-5 " id ="AddAuthorForm" method="POST" onsubmit="return validateAddAuthorData() " enctype=  "multipart/form-data" action="/addauthor/add" >
@@ -277,7 +277,7 @@
 	<!-- script references -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
-    <script src="js/index.js"></script>
+    <script src="/js/index.js"></script>
 
 	</body>
 </html>

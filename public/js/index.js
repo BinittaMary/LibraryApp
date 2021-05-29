@@ -102,7 +102,7 @@ function validateAddAuthorData()
       console.log("Form validation Failed"); 
         sError="Add Book : Mandatory Field(s) are empty. "
         sHTML = "<div style ='color:#ed2939;  '><p>Following mandatory field(s) are empty: </p> <ul>";
-        if (vTitle=="")
+        if (vName=="")
          {
             sHTML = sHTML+"<li>Name</li>"; 
             sError += 'Name,';

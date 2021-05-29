@@ -170,8 +170,8 @@ a,a:hover {
 .Login-container
 {
     max-height: 500 px;
-    height: 4em;
-    background-image: url(../Images/794cb8f4b28f8028b5e065a6e2ea310c.jpg);
+    height: 45em;
+    /* background-image: url(../images/lib_image2.jpg); */
 }
 
 .home-ft-height
@@ -208,8 +208,8 @@ a,a:hover {
 
 .table-container
 {
-    background-color: white;
-    /* background-image: url(../Images/summer-nature-wallpaper-3_edited.png); */
+    /* background-color: white; */
+    background-image: url(../images/lib_image1.jpg); 
     min-height: 660px;
 }
 

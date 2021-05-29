@@ -34,7 +34,7 @@ function router(nav, authors)
             }
             console.log("File is uploaded");
             var authorItem = {
-                name        : req.body.name,
+                authorname  : req.body.name,
                 nationality : req.body.nationality,
                 genre       : req.body.genre,
                 img         : req.file.filename,

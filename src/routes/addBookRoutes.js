@@ -5,7 +5,7 @@ const path    = require('path');
 const addBookRouter = express.Router();
 
 
-function router(nav, books)
+function router(nav, books, newbooks)
 {
 
     addBookRouter.get('/', function(req,res){
@@ -40,6 +40,7 @@ function router(nav, books)
                 img    : req.file.filename,
             }
             books.push(bookItem);
+            newbooks.push(bookItem);
             console.log(`The new book to added is : Title-  ${bookItem.title}, Author - ${bookItem.author}, Genre - ${bookItem.genre}, Image - ${bookItem.img}`);
             res.redirect('/books');
         });
