@@ -87,9 +87,9 @@
       
       <div class="panel">
         <div class="panel-body">
-         
+          <% var len= newbooks.length-1;%> 
           <!--/stories-->
-          <%for(var i=0; i< newbooks.length; i++){%>
+          <%for(var i=len; i> -1; i--){%>
             <% if(i%2==0) {%>  
               <div class="row" style ="background-color: #C5CAE9"> 
                 <%} else {%> 
