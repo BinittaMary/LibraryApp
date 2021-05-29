@@ -36,11 +36,11 @@ function router(nav, authors)
             var authorItem = {
                 authorname  : req.body.name,
                 nationality : req.body.nationality,
-                genre       : req.body.genre,
+                works       : req.body.works,
                 img         : req.file.filename,
             }
             authors.push(authorItem);
-            console.log(`The new book to added is : Name-  ${authorItem.name}, Nationality - ${authorItem.nationality}, Genre - ${authorItem.genre}, Image - ${authorItem.img}`);
+            console.log(`The new author to added is : Name-  ${authorItem.name}, Nationality - ${authorItem.nationality}, Genre - ${authorItem.genre}, Image - ${authorItem.img}`);
             res.redirect('/authors');
         });
     });
