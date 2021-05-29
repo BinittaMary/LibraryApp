@@ -112,7 +112,7 @@ let users =[
   },
   {
     username : 'abcd',
-    password : '123',
+    password : '1234',
     emailaddress : 'abc@gmail.com',
     phoneno  : 1234567890
   },
