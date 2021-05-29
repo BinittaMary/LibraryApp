@@ -82,6 +82,12 @@ let users =[
     password : '123',
     emailaddress : 'abc@gmail.com',
     phoneno  : 1234567890
+  },
+  {
+    username : 'binitta',
+    password : '12345',
+    emailaddress : 'abc@gmail.com',
+    phoneno  : 1234567890
   }
 ];
 
