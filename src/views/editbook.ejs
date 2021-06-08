@@ -27,6 +27,7 @@
     </div>
     <nav class="collapse navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
+        <%if (loggedInFlag){%> 
           <%if (LoggedUser.adminrole == 'USER'){%>
           <% for(var i=0; i<nav.length; i++){ %> 
           <li>
@@ -43,7 +44,9 @@
           </li>        
           <%}%>
         <%}%>
+      <%}%> 
       </ul>
+  
       <ul class="nav navbar-right navbar-nav">
         <%if(loggedInFlag){%>
         <li><a href="#">Logged User :<%=LoggedUser.firstname%></a></li>
@@ -53,10 +56,12 @@
         <li><a href="/login">Login</a></li>   
         <li><a href="/signup">Sign Up</a></li>        
         <%}%> 
+
       </ul>
     </nav>
   </div>
 </header>
+
 <div id="masthead">  
   <div class="container">
     <div class="row">
@@ -125,7 +130,7 @@
                 <div class="form-group p-5 col-md-12 ">
                   <label for="EditBookImage" class="form-label EditPage-label ">Image&nbsp;</label>
                   <span id="EditBookImageSpan"></span>
-                  <input type="file" class="form-control" id="EditBookImage" name='image'  value="/images/<%=book.image%>"  accept=".jpg, .jpeg, .png"/>
+                  <input type="file" class="form-control" id="EditBookImage" name='image' />
                 </div>      
                 <div class="form-group p-5 col-md-12 ">
                   <label for="PreviewBookImage" class="form-label EditPage-label ">Image Preview&nbsp;</label>
@@ -133,7 +138,9 @@
                   <img src="/images/<%=book.image%>" style="width: 15em; height: 10em;">
                 </div>                             
                 <div class="form-group col-md-11 d-grid p-3 text-center">
-                <button type="submit" class="btn btn-primary ">Update Book</button>
+                  <label for="UserConfirmation" class="form-label EditPage-label ">Do you want to update this book?&nbsp;</label> <br> 
+                  <button type="submit" class="btn btn-primary " name="save" value="Yes">Yes</button>
+                  <a href="/books" id="cancel" name="cancel" class="btn btn-primary ">No</a>
               </div>
               </div>
               </form>

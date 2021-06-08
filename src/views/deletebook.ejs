@@ -6,12 +6,12 @@
 		<title><%=title%></title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="/css/bootstrap.min.css" rel="stylesheet">
 		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
 		<!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<link href="css/styles.css" rel="stylesheet">
+		<link href="/css/styles.css" rel="stylesheet">  
 	</head>
 	<body>
 <header class="navbar navbar-bright navbar-fixed-top" role="banner">
@@ -66,7 +66,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-7">
-        <h1>Authors
+        <h1>Edit Book
           <p class="lead"></p>
         </h1>
       </div>
@@ -93,65 +93,68 @@
   
 </div>
 
-
-<div class="container">
+<br>
+<div class="container-fluid" >
   <div class="row">
     
     <div class="col-md-12"> 
       
-      <div class="panel">
-        <div class="panel-body">
+      <div class="panel" >
+        <div class="panel-body" style="background-color: lightgray;">
           
-          
-          <% var len= authors.length-1%>
-          <!--/stories-->
-          <%for(var i=len; i> -1; i--){%>
-            <% if(i%2==0) {%>  
-              <div class="row" style ="background-color: #C5CAE9"> 
-                <%} else {%> 
-                <div class="row" > 
-                  <%}%>     
-            <br>
-            <div class="col-md-2 col-sm-3 text-center">
-              <a class="story-title" href="#"><img alt="" src="images/<%=authors[i].image%>" style="width:100px;height:100px" class="img-circle"></a>
-            </div>
-            <div class="col-md-10 col-sm-9">
-              <h3><%=authors[i].authorname%></h3>
-              <div class="row">
-                <div class="col-xs-9">
-                  <h4><span class="label label-default"><%=authors[i].nationality%></span></h4><h4>
-                  <small style="font-family:courier,'new courier';" class="text-muted"><%=authors[i].works%>  • 
-                    <a href="authors/<%=authors[i]._id%>" class="text-muted">Read More</a></small>
-                  </h4></div>
-                <div class="col-xs-3">
-                  <%if (LoggedUser.adminrole == 'ADMIN'){%>
-                  <h2>
-                    <small style="font-family:courier,'new courier'; " class="text-muted">
-                      <a href="admin/editauthor/<%=authors[i]._id%>" class="text-muted">Edit</a>&nbsp;
-                      <a href="admin/deleteauthor/<%=authors[i]._id%>" class="text-muted">Delete</a>
-                    </small></h2>  
-                  <%}%>  
-                </div>
-              </div>
-              <br><br>
-            </div>
-          </div>
-          <hr>
-          <%}%>
+          <div class="row Login-container p-2 " >
+            <div class="col-lg-4"></div>
+            <!-- sign in form -->
+            <div class="col-lg-4  p-5 m-3 editPage-row rounded" style="background-color : #C5CAE9; ">
 
-                  
-          <!--/stories-->
+
+              <form class="row mt-5 " id ="EditBookForm" method="POST"  action="/admin/deletebook/delete" >
+                <span id="EditBookAlertMsg"></span> 
+                <div class="form-group p-5 col-md-12 ">
+                  <br>
+                  <input type="hidden" class="form-control"  id="EditBookID" name='id' placeholder="Enter the Book Title" value="<%=book._id%>">
+                  <label for="EditBookTitle" class="form-label EditPage-label " >Title&nbsp;</label>
+                  <span id="EditBookTitleSpan"></span>
+                  <input type="text" class="form-control"  id="EditBookTitle"  value="<%=book.title%>" readonly>
+                </div>                
+                <div class="form-group p-5 col-md-12 ">
+                  <label for="EditBookAuthor" class="form-label EditPage-label ">Author&nbsp;/label>
+                  <span id="EditBookAuthorSpan"></span>
+                  <input type="text" class="form-control"  id="EditBookAuthor"   value="<%=book.author%>" readonly>
+                </div>
+                <div class="form-group p-5 col-md-12 ">
+                  <label for="EditBookGenre" class="form-label EditPage-label ">Genre&nbsp;</label>
+                  <span id="EditBookGenreSpan"></span>
+                  <input type="text" class="form-control"  id="EditBookGenre"  value="<%=book.genre%>" readonly>
+                </div>                
+                <div class="form-group p-5 col-md-12 ">
+                  <!-- <label for="EditBookImage" class="form-label EditPage-label ">Image&nbsp;</label>
+                  <span id="EditBookImageSpan"></span>
+                  <input type="file" class="form-control" id="EditBookImage"  value="/images/<%=book.image%>"  accept=".jpg, .jpeg, .png"/>
+                </div>       -->
+                <div class="form-group p-5 col-md-12 ">
+                  <label for="PreviewBookImage" class="form-label EditPage-label ">Image Preview&nbsp;</label>
+                  <span id="PreviewBookImage"></span>
+                  <img src="/images/<%=book.image%>" style="width: 15em; height: 10em;">
+                </div>                             
+                <div class="form-group col-md-11 d-grid p-3 text-center">
+                <label for="UserConfirmation" class="form-label EditPage-label ">Do you want to delete this book?&nbsp;</label> <br> 
+                <button type="submit" class="btn btn-primary " name="save" value="Yes">Yes</button>
+                <a href="/books" id="cancel" name="cancel" class="btn btn-primary ">No</a>
+              </div>
+              </div>
+              </form>
+            </div>
+            <div class="col-lg-2"></div>
+          </div>     
           
-          
-          <!-- <a href="/" class="btn btn-primary pull-right btnNext">More <i class="glyphicon glyphicon-chevron-right"></i></a> -->
         
-          
         </div>
       </div>
                                                                                        
 	                                                
                                                       
-   	</div><!--/col-12-->
+   	</div>
   </div>
 </div>
                                                 
@@ -197,6 +200,8 @@
 </footer>
 	<!-- script references -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+    <script src="/js/index.js"></script>
+
 	</body>
 </html>

@@ -184,6 +184,17 @@ function validateEditBookData()
             sHTML = sHTML+"<li>Genre</li>";  
             document.getElementById('EditBookGenreSpan').innerHTML = "";
          } 
+         // if (vImage=="")
+         // {
+         //    sHTML = sHTML+"<li>Genre</li>";  
+         //    document.getElementById('EditBookImageSpan').innerHTML = "<div class='balloonError'><p>Image is empty</p></div>";
+         //    sError += 'Genre,';
+         // } 
+         // if (vImage!="")
+         // {
+         //    sHTML = sHTML+"<li>Genre</li>";  
+         //    document.getElementById('EditBookImageSpan').innerHTML = "";
+         // } 
          sHTML= sHTML+"</ul></div>";
          console.log(sError); 
       //   spanElem.innerHTML= sHTML; 
