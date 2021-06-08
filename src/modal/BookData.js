@@ -13,7 +13,8 @@ const BookSchema = new Schema({
     author      : String,
     genre       : String,
     description : String,
-    image       : String
+    image       : String,
+    newbook     : String
 });
 
 var Bookdata = mongoose.model('bookdata',BookSchema);

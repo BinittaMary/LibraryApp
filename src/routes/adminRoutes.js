@@ -60,6 +60,7 @@ function router(nav, books, newbooks, loginUser)
                 genre  : req.body.genre,
                 description : '',
                 image  : req.file.filename,
+                newbook : 'Y'
             }
             var book= Bookdata(bookItem);
             book.save();

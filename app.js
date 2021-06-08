@@ -9,12 +9,6 @@ const nav = [
   {
     link :'/authors',name :'Authors', previlage : 'BOTH'
   },  
-  // {
-  //   link :'/login',name :'Login', previlage : 'BOTH'
-  // },  
-  // {
-  //   link :'/signup',name :'Sign Up', previlage : 'BOTH'
-  // },
   {
     link :'/admin',name :'Add Book', previlage : 'ADMIN'
   },  
@@ -163,6 +157,8 @@ const signupRouter = require('./src/routes/signupRoutes')(nav, users, signup, lo
 
 const Userdata = require('./src/modal/UserData');
 
+const Bookdata = require('./src/modal/BookData');
+
 
 const app = new express();
 
@@ -221,14 +217,19 @@ app.get('/', function(req,res)
         bFirstTime = false;
       });
     }
-    res.render('index', {
-      nav , 
-      title : 'Library' ,
-      newbooks , 
-      LoggedUser,
-      loggedInFlag
+
+    Bookdata.find({newbook : "Y"})
+    .then(function(booklist){
+        res.render('index', {
+            nav , 
+            title : 'Library',
+            booklist,
+            LoggedUser,
+            loggedInFlag  
+            });
     });
 });
+
 
 app.get('/logout', function(req,res)
 {

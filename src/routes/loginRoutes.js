@@ -1,6 +1,7 @@
 const express = require('express');
 
 const Userdata = require('../modal/UserData');
+const Bookdata    = require('../modal/BookData');
 
 const loginRouter= express.Router();
 function router(nav, users, login, newbooks, loginUser)
@@ -57,13 +58,16 @@ function router(nav, users, login, newbooks, loginUser)
         };
         if (validFlag)
           {
-            res.render('index', {
-              nav , 
-              title : 'Library' ,
-              newbooks , 
-              LoggedUser,
-              loggedInFlag
-            });
+          Bookdata.find({'newbook' : 'Y'})
+          .then(function(booklist){
+              res.render('index', {
+                  nav , 
+                  title : 'Library',
+                  booklist,
+                  LoggedUser,
+                  loggedInFlag  
+                  });
+          });
           }
         else 
           {

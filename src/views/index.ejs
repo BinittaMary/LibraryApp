@@ -98,7 +98,7 @@
       
       <div class="panel">
         <div class="panel-body">
-          <% var len= newbooks.length-1;%> 
+          <% var len= booklist.length-1;%> 
           <!--/stories-->
           <%for(var i=len; i> -1; i--){%>
             <% if(i%2==0) {%>  
@@ -108,14 +108,14 @@
                   <%}%>    
               <br>
               <div class="col-md-2 col-sm-3 text-center">
-                <a class="story-title" href="#"><img alt="" src="/images/<%=newbooks[i].img%>" style="width:100px;height:100px" class="img-circle"></a>
+                <a class="story-title" href="#"><img alt="" src="/images/<%=booklist[i].image%>" style="width:100px;height:100px" class="img-circle"></a>
               </div>
               <div class="col-md-10 col-sm-9">
-                <h3><%=newbooks[i].title%></h3>
+                <h3><%=booklist[i].title%></h3>
                 <div class="row">
                   <div class="col-xs-9">
-                    <h4><span class="label label-default"><%=newbooks[i].author%></span></h4><h4>
-                    <small style="font-family:courier,'new courier';" class="text-muted"><%=newbooks[i].genre%> 
+                    <h4><span class="label label-default"><%=booklist[i].author%></span></h4><h4>
+                    <small style="font-family:courier,'new courier';" class="text-muted"><%=booklist[i].genre%> 
                       </small>
                     </h4></div>
                   <div class="col-xs-3"></div>
