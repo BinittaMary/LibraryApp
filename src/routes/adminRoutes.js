@@ -6,17 +6,7 @@ const Authordata   = require('../modal/AuthorData');
 
 const adminRouter = express.Router();
 
-const destn = path.join(__dirname, '../../', 'public', 'images');
-console.log(destn);
-var storage =   multer.diskStorage({
-    destination: function (req, file, callback) {
-      callback(null, destn);
-    },
-    filename: function(req, file, cb) {
-      cb(null, file.originalname);
-  }
-  });
-var upload = multer({ storage : storage});
+
 
 function router(nav, books, newbooks, loginUser)
 {
@@ -109,34 +99,41 @@ function router(nav, books, newbooks, loginUser)
  
     });
 
-    adminRouter.post('/editBook/edit', upload.single('image'),function(req,res){
-           var title  = req.body.title;
-           if(req.file)
-            {
-               var image  = req.file.filename;
-                console.log(`${image}`)  
+    adminRouter.post('/editBook/edit',function(req,res){
+        const destn = path.join(__dirname, '../../', 'public', 'images');
+        console.log(destn);
+        var storage =   multer.diskStorage({
+            destination: function (req, file, callback) {
+              callback(null, destn);
+            },
+            filename: function(req, file, cb) {
+              cb(null, file.originalname);
+          }
+          });
+        var upload = multer({ storage : storage}).single('image');
+        upload(req,res,function(err) {
+            if(err) {
+                console.log("Error uploading file.");
             }
-            else{
-                console.log('file not exist');    
+            console.log("File is uploaded");
+            var bookItem = {
+                id     : req.body.id,
+                title  : req.body.title,
+                author : req.body.author,
+                genre  : req.body.genre,
+                description : '',
+                image  : req.file.filename,
             }
-           
-            // var bookItem = {
-            //     id     : req.body.id,
-            //     title  : req.body.title,
-            //     author : req.body.author,
-            //     genre  : req.body.genre,
-            //     description : '',
-            //     image  : req.file.filename,
-            // }
             
-            // Bookdata.updateOne({_id : bookItem.id}, {title: bookItem.title, author: bookItem.author, genre :bookItem.genre,image : bookItem.image})
-            // .then(function(book){
-            //     console.log(`The book is updated : Title-  ${bookItem.title}, Author - ${bookItem.author}, Genre - ${bookItem.genre}, Image - ${bookItem.img}`);
-            //     res.redirect('/books');
-            // });  
+            Bookdata.updateOne({_id : bookItem.id}, {title: bookItem.title, author: bookItem.author, genre :bookItem.genre,image : bookItem.image})
+            .then(function(book){
+                console.log(`The book is updated : Title-  ${bookItem.title}, Author - ${bookItem.author}, Genre - ${bookItem.genre}, Image - ${bookItem.img}`);
+                res.redirect('/books');
+            });  
 
-     
+        });
     });
+
 
 
     /*** delete page action */
@@ -301,15 +298,44 @@ function router(nav, books, newbooks, loginUser)
 
 
     /*** delete page action */
-    adminRouter.get('/deleteauthor/:id', function(req,res){
+    adminRouter.get('/deleteAuthor/:id', function(req,res){
+        sess = req.session; 
+        var LoggedUser;
+        var loggedInFlag;
+        if (sess.loggedIn)
+        {loggedInFlag =sess.loggedIn}
+        else
+           {loggedInFlag =false;}
+        if (sess.loginuser)
+        {
+          LoggedUser = sess.loginuser;
+        }
+        else
+        {LoggedUser = loginUser;}        
         const id =req.params.id;
+        Authordata.findOne({'_id' : id})
+        .then(function(author){
+            res.render('deleteauthor', {
+                nav , 
+                title : 'Library',
+                author,
+                LoggedUser,
+                loggedInFlag   
+        });
+        });
+ 
+    });
+    /*** delete page action */
+    adminRouter.post('/deleteAuthor/delete', function(req,res){
+        const id =req.body.id;
         Authordata.deleteOne({'_id' : id})
         .then(function(author){
-            console.log(`The book is deleted : ID -  ${id}`);
+            console.log(`The Author is deleted : ID -  ${id}`);
             res.redirect('/authors');
         });
  
-    });    
+    });
+
     return adminRouter;
 }
 

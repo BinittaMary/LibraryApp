@@ -66,7 +66,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-7">
-        <h1>Edit Author
+        <h1>Delete Author
           <p class="lead"></p>
         </h1>
       </div>
@@ -108,38 +108,40 @@
             <div class="col-lg-4  p-5 m-3 editPage-row rounded" style="background-color : #C5CAE9; ">
 
 
-              <form class="row mt-5 " id ="EditAuthorForm" method="POST" onsubmit="return validateEditAuthorData() " enctype=  "multipart/form-data" action="/admin/editAuthor/edit" >
+              <form class="row mt-5 " id ="EditAuthorForm" method="POST"   action="/admin/deleteAuthor/delete" >
                 <span id="EditAuthorAlertMsg"></span> 
                 <div class="form-group p-5 col-md-12 ">
                   <br>
                   <input type="hidden" class="form-control"  id="EditAuthorID" name='id' value="<%=author._id%>">
-                  <label for="EditAuthorName" class="form-label EditPage-label ">Name&nbsp;<strong style="color: red;">*</strong></label>
+                  <label for="EditAuthorName" class="form-label EditPage-label ">Name&nbsp;</label>
                   <span id="EditAuthorNameSpan"></span>
-                  <input type="text" class="form-control"  id="EditAuthorName" name='name' placeholder="Enter the Author Name" value="<%=author.authorname%>">
+                  <input type="text" class="form-control"  id="EditAuthorName" value="<%=author.authorname%> readonly">
                 </div>                
                 <div class="form-group p-5 col-md-12 ">
-                  <label for="EditAuthorNationality" class="form-label EditPage-label ">Nationality&nbsp;<strong style="color: red;">*</strong></label>
+                  <label for="EditAuthorNationality" class="form-label EditPage-label ">Nationality&nbsp;</label>
                   <span id="EditAuthorNationalitySpan"></span>
-                  <input type="text" class="form-control"  id="EditAuthorNationality" name='nationality' placeholder="Enter the Nationality" value="<%=author.nationality%>">
+                  <input type="text" class="form-control"  id="EditAuthorNationality"  value="<%=author.nationality%>" readonly>
                 </div>
                 <div class="form-group p-5 col-md-12 ">
-                  <label for="EditAuthorGenre" class="form-label EditPage-label ">Famous Works&nbsp;<strong style="color: red;">*</strong></label>
+                  <label for="EditAuthorGenre" class="form-label EditPage-label ">Famous Works&nbsp;</label>
                   <span id="EditAuthorWorksSpan"></span>
-                  <input type="text" class="form-control"  id="EditAuthorworks" name='works' placeholder="Enter the famous works" value="<%=author.works%>">
+                  <input type="text" class="form-control"  id="EditAuthorworks" value="<%=author.works%>" readonly>
                 </div>                
-                <div class="form-group p-5 col-md-12 ">
-                  <label for="EditAuthorImage" class="form-label EditPage-label ">Image&nbsp;<strong style="color: red;">*</strong></label>
+                <!-- <div class="form-group p-5 col-md-12 ">
+                  <label for="EditAuthorImage" class="form-label EditPage-label ">Image&nbsp;</label>
                   <span id="EditAuthorEditBookImageSpan"></span>
-                  <input type="file" class="form-control" id="EditAuthorImage" name='image' value="<%=author.image%>"/>
-                </div>
+                  <input type="file" class="form-control" id="EditAuthorImage"  readonly/> -->
+                <!-- </div>  -->
                 <div class="form-group p-5 col-md-12 ">
                   <label for="PreviewauthorImage" class="form-label EditPage-label ">Image Preview&nbsp;</label>
                   <span id="PreviewAuthorkImage"></span>
                   <img src="/images/<%=author.image%>" style="width: 15em; height: 10em;">
-                </div>                                                  
+                </div>                                    
                 <div class="form-group col-md-11 d-grid p-3 text-center">
-                <button type="submit" class="btn btn-primary ">Update Author</button>
-              </div>
+                  <label for="UserConfirmation" class="form-label EditPage-label ">Do you want to delete this author?&nbsp;</label> <br> 
+                  <button type="submit" class="btn btn-primary " name="save" value="Yes">Yes</button>
+                  <a href="/authors" id="cancel" name="cancel" class="btn btn-primary ">No</a>   
+                 </div>
               </div>
               </form>
             </div>

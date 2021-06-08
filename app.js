@@ -251,5 +251,5 @@ app.get('/logout', function(req,res)
 
 app.listen(port, ()=>
 {
-  console.log(`library server listening to the port ${port}`);
+  console.log(`library server listening to the port ${port}- admin credetials email id-admin@lib.com pwd: Admin1234  `);
 });
