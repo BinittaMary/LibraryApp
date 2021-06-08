@@ -1,25 +1,29 @@
 const express = require('express');
 
+const session = require('express-session');
+
 const nav = [
   {
-    link :'/books',name :'Books'
+    link :'/books',name :'Books', previlage : 'BOTH'
   },
   {
-    link :'/authors',name :'Authors'
+    link :'/authors',name :'Authors', previlage : 'BOTH'
+  },  
+  // {
+  //   link :'/login',name :'Login', previlage : 'BOTH'
+  // },  
+  // {
+  //   link :'/signup',name :'Sign Up', previlage : 'BOTH'
+  // },
+  {
+    link :'/admin',name :'Add Book', previlage : 'ADMIN'
   },  
   {
-    link :'/login',name :'Login'
-  },  
-  {
-    link :'/signup',name :'Sign Up'
-  },
-  {
-    link :'/addbook',name :'Add Book'
-  },  
-  {
-    link :'/addauthor',name :'Add Author'
+    link :'/admin/addauthor',name :'Add Author', previlage : 'ADMIN'
   }
   ];
+
+  let  bFirstTime= true;
 
   let books = [
     {
@@ -103,6 +107,12 @@ let login =
     loginErrMessage : ''
   };
 
+  let signup =  
+  {
+    signupError : false,
+    signupErrMessage : ''
+  };
+
 let users =[
   {
     username : 'admin',
@@ -125,18 +135,34 @@ let users =[
 ];
 
 
+let loginUser = {
+  emailaddress  : '',
+  password      : '',
+  firstname     : '',
+  lastname      : '',
+  phoneno       : '',
+  adminrole     : 'USER'
+};
 
-const booksRouter = require('./src/routes/bookRoutes')(nav, books);
+let loggedIn  = false;
 
-const authorsRouter = require('./src/routes/authorRoutes')(nav, authors);
+let adminlogged =false;
 
-const loginRouter = require('./src/routes/loginRoutes')(nav, users, login, newbooks );
+let sess;
 
-const addBookRouter = require('./src/routes/addBookRoutes')(nav, books, newbooks);
+const booksRouter = require('./src/routes/bookRoutes')(nav, loginUser);
 
-const addAuthorRouter = require('./src/routes/addAuthorRoutes')(nav, authors);
+const authorsRouter = require('./src/routes/authorRoutes')(nav, loginUser);
 
-const signupRouter = require('./src/routes/signupRoutes')(nav, users);
+const loginRouter = require('./src/routes/loginRoutes')(nav, users, login, newbooks, loginUser);
+
+const adminRouter = require('./src/routes/adminRoutes')(nav, books, newbooks, loginUser);
+
+
+const signupRouter = require('./src/routes/signupRoutes')(nav, users, signup, loginUser);
+
+const Userdata = require('./src/modal/UserData');
+
 
 const app = new express();
 
@@ -148,6 +174,7 @@ app.set('view engine', 'ejs');
 app.set('views', './src/views');
 app.use(express.urlencoded({extended : true}));
 app.use(express.static('./public'));
+app.use(session({secret: 'key'}));
 //*** router for book */
 app.use('/books',booksRouter);
 //*** router for authors */
@@ -157,18 +184,62 @@ app.use('/login',loginRouter);
 //*** router for signup */
 app.use('/signup',signupRouter);
 //*** router for addbook */
-app.use('/addbook', addBookRouter);
-//*** router for addAuthor */
-app.use('/addauthor', addAuthorRouter);
+app.use('/admin', adminRouter);
+//*** router for express-session */
+// app.use('/addauthor', addAuthorRouter);
+
 
 app.get('/', function(req,res)
-{
+{ 
+  sess = req.session; 
+  var LoggedUser;
+  var loggedInFlag;
+  if (sess.loggedIn)
+  {loggedInFlag =sess.loggedIn}
+  else
+     {loggedInFlag =false;}
+  if (sess.loginuser)
+  {
+    LoggedUser = sess.loginuser;
+  }
+  else
+  {LoggedUser = loginUser;}
+
+    if (bFirstTime){
+      var adminuser = {
+        emailaddress  : 'admin@lib.com',
+        password      : 'Admin1234',
+        firstname     : 'Admin',
+        lastname      : '',
+        phoneno       : '',
+        adminrole     : 'ADMIN'
+      }
+      Userdata.deleteOne({'emailaddress' : adminuser.emailaddress})
+      .then(function(author){
+        var vUser= Userdata(adminuser);
+        vUser.save();
+        bFirstTime = false;
+      });
+    }
     res.render('index', {
       nav , 
       title : 'Library' ,
-      newbooks 
+      newbooks , 
+      LoggedUser,
+      loggedInFlag
     });
 });
+
+app.get('/logout', function(req,res)
+{
+  req.session.destroy(function(err) {
+    if(err) {
+      return console.log(err);
+         }
+  }); 
+  res.redirect('/');
+});  
+
 
 
 

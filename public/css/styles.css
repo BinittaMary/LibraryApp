@@ -195,7 +195,7 @@ a,a:hover {
 .signup-row
 {
     /* background-color: #C5CAE9; */
-    height: 35em;
+    height: 48em;
     border :#283593 4px solid;
 }
 
@@ -229,7 +229,7 @@ a,a:hover {
 .addPage-row
 {
     /* background-color: #C5CAE9; */
-    height: 35em;
+    height: 40em;
     border :#283593 4px solid;
 }
 
@@ -239,6 +239,32 @@ a,a:hover {
     /* font-family : cursive; */
 }
 
+
+.editPage-row
+{
+    /* background-color: #C5CAE9; */
+    height: 40em;
+    border :#283593 4px solid;
+}
+
+.EditPage-label
+{
+    color :#1A237E;
+    /* font-family : cursive; */
+}
+
+.EditPage-row
+{
+    /* background-color: #C5CAE9; */
+    height: 35em;
+    border :#283593 4px solid;
+}
+
+.EditPage-label
+{
+    color :#1A237E;
+    /* font-family : cursive; */
+}
 /** home page **/
 
 .home-exp-container-bg

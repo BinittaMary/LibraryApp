@@ -6,12 +6,12 @@
 		<title><%=title%></title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="/css/bootstrap.min.css" rel="stylesheet">
 		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
 		<!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<link href="css/styles.css" rel="stylesheet">  
+		<link href="/css/styles.css" rel="stylesheet">  
 	</head>
 	<body>
 <header class="navbar navbar-bright navbar-fixed-top" role="banner">
@@ -27,11 +27,32 @@
     </div>
     <nav class="collapse navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
-        <%for(var i=0; i<nav.length; i++){ %> 
-        <li>
-          <a href="<%=nav[i].link%>"><%=nav[i].name%></a>
-        </li>        
+          <%if (LoggedUser.adminrole == 'USER'){%>
+          <% for(var i=0; i<nav.length; i++){ %> 
+          <li>
+              <%if (nav[i].previlage == 'BOTH'){%>
+              <a href="<%=nav[i].link%>"><%=nav[i].name%></a>
+              <%}%>
+          </li>        
+          <%}%>
         <%}%>
+        <%if (LoggedUser.adminrole == 'ADMIN'){%>
+          <% for(var i=0; i<nav.length; i++){ %> 
+          <li>
+              <a href="<%=nav[i].link%>"><%=nav[i].name%></a>
+          </li>        
+          <%}%>
+        <%}%>
+      </ul>
+      <ul class="nav navbar-right navbar-nav">
+        <%if(loggedInFlag){%>
+        <li><a href="#">Logged User :<%=LoggedUser.firstname%></a></li>
+        <li><a href="/logout">Log Out</a></li>
+        <%}%>
+        <%if(!loggedInFlag) {%>
+        <li><a href="/login">Login</a></li>   
+        <li><a href="/signup">Sign Up</a></li>        
+        <%}%> 
       </ul>
     </nav>
   </div>
@@ -83,13 +104,18 @@
             <div class="col-lg-4  p-5 m-3 signup-row rounded" style="background-color : #C5CAE9; ">
 
 
-              <form class="row mt-5 " id ="SignUpForm" method="POST" onsubmit="return validateSignUpForm()" action="/signup/adduser">
-                <span id="SignUpAlertMsg"></span> 
+              <form class="row mt-5 " id ="SignUpForm" method="POST" onsubmit="return validateSignUpData()" action="/signup/adduser">
+                <%if (signup.signupError) {%>   
+                  <span id="SignUpAlertMsg"><div ><p style="color: #ed2939;text-align: center; padding:5px;"><%=signup.signupErrMessage%></p></div> </span> 
+                <%} else {%>
+                  <span id="SignUpAlertMsg"></span> 
+                  <%}%>
                 <div class="form-group p-5 col-md-12 ">
                   <br>
-                  <label for="SignUpUserNameLabel" class="form-label login-label ">User Name</label><label class="form-label text-danger">&nbsp;* </label>
-                  <span id="SignUpUserNameSpan"></span>
-                  <input type="text" class="form-control"  id="SignUpUserName" name="name" placeholder="Enter the User Name">
+                  <label for="inputPassword4" class="form-label login-label">Email ID</label><label class="form-label text-danger">&nbsp;* </label>
+                  <span id="SignUpEmailIdSpan"></span>
+                  <input type="text" class="form-control" id="SignUpEmailId" name="emailid" placeholder="Enter the Email ID" oninput="validateEmail('SignUpEmailId','SignUpEmailIdSpan')">
+
                 </div>
                 <div class="form-group col-md-12 p-3">
                   <label for="inputPassword4" class="form-label login-label">Password</label><label class="form-label text-danger">&nbsp;* </label>
@@ -97,15 +123,20 @@
                   <input type="password" class="form-control" id="SignUpPassword" name="password" placeholder="Enter the Password" oninput="validatePasswordStrength('SignUpPassword','SignUpPasswordSpan',2)" onfocusout="validatePasswordStrength('SignUpPassword','SignUpPasswordSpan',1)">
                 </div>
                 <div class="form-group col-md-12 p-3">
-                  <label for="inputPassword4" class="form-label login-label">Email ID</label><label class="form-label text-danger">&nbsp;* </label>
-                  <span id="SignUpEmailIdSpan"></span>
-                  <input type="text" class="form-control" id="SignUpEmailId" name="emailid" placeholder="Enter the Email ID" oninput="validateEmail('SignUpEmailId','SignUpEmailIdSpan')">
-                </div>
-                <div class="form-group col-md-12 p-3">
                   <label for="inputphoneno" class="form-label login-label">Phone Number</label><label class="form-label text-danger">&nbsp;* </label>
                   <span id="PhoneNumberSpan"></span>
                   <input type="text" class="form-control" id="phonenumber" placeholder="Phone Number" name ="Phoneno" oninput="validatePhone('phonenumber','PhoneNumberSpan' )">
                   <!-- <label for="PasswordHint" class="form-label text-secondary">Make sure it's in any of the format XXXXXXXXXX/XXX XXX XXXX/XXX.XXX.XXXX/XXX-XXX-XXXX</label> -->
+                </div>
+                <div class="form-group col-md-12 p-3">
+                  <label for="SignUpFirstNameLabel" class="form-label login-label ">First Name</label><label class="form-label text-danger">&nbsp;* </label>
+                  <span id="SignUpFirstNameSpan"></span>
+                  <input type="text" class="form-control"  id="SignUpFirstName" name="firstname" placeholder="Enter the First Name">
+                </div>
+                <div class="form-group col-md-12 p-3">
+                  <label for="SignUpLastNameLabel" class="form-label login-label ">Last Name</label><label class="form-label text-danger">&nbsp;* </label>
+                  <span id="SignUpLastNameSpan"></span>
+                  <input type="text" class="form-control"  id="SignUpLastName" name="lastname" placeholder="Enter the Last Name">
                 </div>
                 <div class="form-group col-md-11 d-grid p-3 text-center">
                 <button type="submit" class="btn btn-primary ">Register</button>

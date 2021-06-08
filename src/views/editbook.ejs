@@ -57,12 +57,11 @@
     </nav>
   </div>
 </header>
-
 <div id="masthead">  
   <div class="container">
     <div class="row">
       <div class="col-md-7">
-        <h1>Add Author
+        <h1>Edit Book
           <p class="lead"></p>
         </h1>
       </div>
@@ -88,47 +87,53 @@
   </div><!-- /cont -->
   
 </div>
-<br>
 
-<div class="container-fluid">
+<br>
+<div class="container-fluid" >
   <div class="row">
     
     <div class="col-md-12"> 
       
-      <div class="panel"  style="background-image: url(../images/lib_image2.jpg)">
-        <div class="panel-body">
+      <div class="panel" >
+        <div class="panel-body" style="background-color: lightgray;">
           
-          <div class="row Login-container p-2  " >
+          <div class="row Login-container p-2 " >
             <div class="col-lg-4"></div>
             <!-- sign in form -->
-            <div class="col-lg-4  p-5 m-3 addPage-row rounded" style="background-color : #C5CAE9; ">
+            <div class="col-lg-4  p-5 m-3 editPage-row rounded" style="background-color : #C5CAE9; ">
 
 
-              <form class="row mt-5 " id ="AddAuthorForm" method="POST" onsubmit="return validateAddAuthorData() " enctype=  "multipart/form-data" action="/admin/addAuthor/add" >
-                <span id="AddAuthorAlertMsg"></span> 
+              <form class="row mt-5 " id ="EditBookForm" method="POST" onsubmit="return validateEditBookData() "  enctype=  "multipart/form-data" action="/admin/editBook/edit" >
+                <span id="EditBookAlertMsg"></span> 
                 <div class="form-group p-5 col-md-12 ">
                   <br>
-                  <label for="AddAuthorName" class="form-label addPage-label ">Name&nbsp;<strong style="color: red;">*</strong></label>
-                  <span id="AddAuthorNameSpan"></span>
-                  <input type="text" class="form-control"  id="AddAuthorName" name='name' placeholder="Enter the Author Name">
+                  <input type="hidden" class="form-control"  id="EditBookID" name='id' placeholder="Enter the Book Title" value="<%=book._id%>">
+                  <label for="EditBookTitle" class="form-label EditPage-label ">Title&nbsp;<strong style="color: red;">*</strong></label>
+                  <span id="EditBookTitleSpan"></span>
+                  <input type="text" class="form-control"  id="EditBookTitle" name='title' placeholder="Enter the Book Title" value="<%=book.title%>">
                 </div>                
                 <div class="form-group p-5 col-md-12 ">
-                  <label for="AddAuthorNationality" class="form-label addPage-label ">Nationality&nbsp;<strong style="color: red;">*</strong></label>
-                  <span id="AddAuthorNationalitySpan"></span>
-                  <input type="text" class="form-control"  id="AddAuthorNationality" name='nationality' placeholder="Enter the Nationality">
+                  <label for="EditBookAuthor" class="form-label EditPage-label ">Author&nbsp;<strong style="color: red;">*</strong></label>
+                  <span id="EditBookAuthorSpan"></span>
+                  <input type="text" class="form-control"  id="EditBookAuthor" name='author' placeholder="Enter the Author"  value="<%=book.author%>">
                 </div>
                 <div class="form-group p-5 col-md-12 ">
-                  <label for="AddAuthorGenre" class="form-label addPage-label ">Famous Works&nbsp;<strong style="color: red;">*</strong></label>
-                  <span id="AddAuthorGenreSpan"></span>
-                  <input type="text" class="form-control"  id="AddAuthorGenre" name='works' placeholder="Enter the famous works">
+                  <label for="EditBookGenre" class="form-label EditPage-label ">Genre&nbsp;<strong style="color: red;">*</strong></label>
+                  <span id="EditBookGenreSpan"></span>
+                  <input type="text" class="form-control"  id="EditBookGenre" name='genre' placeholder="Enter the Genre"  value="<%=book.genre%>">
                 </div>                
                 <div class="form-group p-5 col-md-12 ">
-                  <label for="AddAuthorImage" class="form-label addPage-label ">Image&nbsp;<strong style="color: red;">*</strong></label>
-                  <span id="AddAuthorAddBookImageSpan"></span>
-                  <input type="file" class="form-control" id="AddAuthorImage" name='image' />
-                </div>                                 
+                  <label for="EditBookImage" class="form-label EditPage-label ">Image&nbsp;</label>
+                  <span id="EditBookImageSpan"></span>
+                  <input type="file" class="form-control" id="EditBookImage" name='image'  value="/images/<%=book.image%>"  accept=".jpg, .jpeg, .png"/>
+                </div>      
+                <div class="form-group p-5 col-md-12 ">
+                  <label for="PreviewBookImage" class="form-label EditPage-label ">Image Preview&nbsp;</label>
+                  <span id="PreviewBookImage"></span>
+                  <img src="/images/<%=book.image%>" style="width: 15em; height: 10em;">
+                </div>                             
                 <div class="form-group col-md-11 d-grid p-3 text-center">
-                <button type="submit" class="btn btn-primary ">Add Author</button>
+                <button type="submit" class="btn btn-primary ">Update Book</button>
               </div>
               </div>
               </form>

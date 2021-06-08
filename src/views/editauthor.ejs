@@ -62,7 +62,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-7">
-        <h1>Add Author
+        <h1>Edit Author
           <p class="lead"></p>
         </h1>
       </div>
@@ -88,47 +88,48 @@
   </div><!-- /cont -->
   
 </div>
-<br>
 
-<div class="container-fluid">
+<br>
+<div class="container-fluid" >
   <div class="row">
     
     <div class="col-md-12"> 
       
-      <div class="panel"  style="background-image: url(../images/lib_image2.jpg)">
-        <div class="panel-body">
+      <div class="panel" >
+        <div class="panel-body" style="background-color: lightgray;">
           
-          <div class="row Login-container p-2  " >
+          <div class="row Login-container p-2 " >
             <div class="col-lg-4"></div>
             <!-- sign in form -->
-            <div class="col-lg-4  p-5 m-3 addPage-row rounded" style="background-color : #C5CAE9; ">
+            <div class="col-lg-4  p-5 m-3 editPage-row rounded" style="background-color : #C5CAE9; ">
 
 
-              <form class="row mt-5 " id ="AddAuthorForm" method="POST" onsubmit="return validateAddAuthorData() " enctype=  "multipart/form-data" action="/admin/addAuthor/add" >
-                <span id="AddAuthorAlertMsg"></span> 
+              <form class="row mt-5 " id ="EditAuthorForm" method="POST" onsubmit="return validateEditAuthorData() " enctype=  "multipart/form-data" action="/admin/editAuthor/edit" >
+                <span id="EditAuthorAlertMsg"></span> 
                 <div class="form-group p-5 col-md-12 ">
                   <br>
-                  <label for="AddAuthorName" class="form-label addPage-label ">Name&nbsp;<strong style="color: red;">*</strong></label>
-                  <span id="AddAuthorNameSpan"></span>
-                  <input type="text" class="form-control"  id="AddAuthorName" name='name' placeholder="Enter the Author Name">
+                  <input type="hidden" class="form-control"  id="EditAuthorID" name='id' value="<%=author._id%>">
+                  <label for="EditAuthorName" class="form-label EditPage-label ">Name&nbsp;<strong style="color: red;">*</strong></label>
+                  <span id="EditAuthorNameSpan"></span>
+                  <input type="text" class="form-control"  id="EditAuthorName" name='name' placeholder="Enter the Author Name" value="<%=author.authorname%>">
                 </div>                
                 <div class="form-group p-5 col-md-12 ">
-                  <label for="AddAuthorNationality" class="form-label addPage-label ">Nationality&nbsp;<strong style="color: red;">*</strong></label>
-                  <span id="AddAuthorNationalitySpan"></span>
-                  <input type="text" class="form-control"  id="AddAuthorNationality" name='nationality' placeholder="Enter the Nationality">
+                  <label for="EditAuthorNationality" class="form-label EditPage-label ">Nationality&nbsp;<strong style="color: red;">*</strong></label>
+                  <span id="EditAuthorNationalitySpan"></span>
+                  <input type="text" class="form-control"  id="EditAuthorNationality" name='nationality' placeholder="Enter the Nationality" value="<%=author.nationality%>">
                 </div>
                 <div class="form-group p-5 col-md-12 ">
-                  <label for="AddAuthorGenre" class="form-label addPage-label ">Famous Works&nbsp;<strong style="color: red;">*</strong></label>
-                  <span id="AddAuthorGenreSpan"></span>
-                  <input type="text" class="form-control"  id="AddAuthorGenre" name='works' placeholder="Enter the famous works">
+                  <label for="EditAuthorGenre" class="form-label EditPage-label ">Famous Works&nbsp;<strong style="color: red;">*</strong></label>
+                  <span id="EditAuthorWorksSpan"></span>
+                  <input type="text" class="form-control"  id="EditAuthorworks" name='works' placeholder="Enter the famous works" value="<%=author.works%>">
                 </div>                
                 <div class="form-group p-5 col-md-12 ">
-                  <label for="AddAuthorImage" class="form-label addPage-label ">Image&nbsp;<strong style="color: red;">*</strong></label>
-                  <span id="AddAuthorAddBookImageSpan"></span>
-                  <input type="file" class="form-control" id="AddAuthorImage" name='image' />
+                  <label for="EditAuthorImage" class="form-label EditPage-label ">Image&nbsp;<strong style="color: red;">*</strong></label>
+                  <span id="EditAuthorEditBookImageSpan"></span>
+                  <input type="file" class="form-control" id="EditAuthorImage" name='image' value="<%=author.image%>"/>
                 </div>                                 
                 <div class="form-group col-md-11 d-grid p-3 text-center">
-                <button type="submit" class="btn btn-primary ">Add Author</button>
+                <button type="submit" class="btn btn-primary ">Update Author</button>
               </div>
               </div>
               </form>

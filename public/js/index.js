@@ -3,9 +3,9 @@ function validateLoginData()
 {
    
     
-    let vUserName = document.getElementById('LoginUserName').value;
+    let vUserName = document.getElementById('LoginEmailID').value;
     let vPwd   = document.getElementById('LoginPassword').value;
-    let spanElem= document.getElementById('LoginAlertMsg');
+   //  let spanElem= document.getElementById('LoginAlertMsg');
     let res="";
     let sHTML="";
     let msg ="";
@@ -14,16 +14,27 @@ function validateLoginData()
         console.log("empty if"); 
         sHTML = "<div style ='color:#ed2939;  '><p>Authentication failed due to the following field(s) are empty</p> <ul>";
         if (vUserName=="")
-         {
+         { 
+            document.getElementById('LoginUserNameSpan').innerHTML = "<div class='balloonError'><p>Email ID is empty</p></div>"; 
+            sHTML = sHTML+"<li>Email</li>"; 
+         }
+         if (vUserName!="")
+         { 
+            document.getElementById('LoginUserNameSpan').innerHTML = ""; 
             sHTML = sHTML+"<li>Email</li>"; 
          }
          if (vPwd=="")
+         {
+            sHTML = sHTML+"<li>Password</li>"; 
+            document.getElementById('LoginPasswordSpan').innerHTML = "<div class='balloonError'><p>Password is empty</p></div>"; 
+         } 
+         if (vPwd!="")
          {
             sHTML = sHTML+"<li>Password</li>";  
          } 
          sHTML= sHTML+"</ul></div>";
          console.log(sHTML); 
-        spanElem.innerHTML= sHTML; 
+      //   spanElem.innerHTML= sHTML; 
         msg=sHTML;
         return false; 
     }
@@ -35,6 +46,18 @@ function validateLoginData()
      
 }
 
+function validateLoginForm()
+{   
+       if ((validateLoginData() && validateEmail('LoginEmailID','LoginUserNameSpan' )&& validatePasswordStrength('LoginPassword','LoginPasswordSpan',1)) == true)
+      {
+           return true;  
+      }
+    else
+      {
+        return false; 
+      }
+}
+
 function validateAddBookData()
 {
     
@@ -42,7 +65,7 @@ function validateAddBookData()
     let vAuthor   = document.getElementById('AddBookAuthor').value;
     let vGenre   = document.getElementById('AddBookGenre').value;    
     let vImage   = document.getElementById('AddBookImage').value;
-    let spanElem= document.getElementById('AddBookAlertMsg');
+   //  let spanElem= document.getElementById('AddBookAlertMsg');
     let res="";
     let sHTML="";
     let sError="";
@@ -55,32 +78,121 @@ function validateAddBookData()
         if (vTitle=="")
          {
             sHTML = sHTML+"<li>Title</li>"; 
+            document.getElementById('AddBookTitleSpan').innerHTML = "<div class='balloonError'><p>Title is empty</p></div>";
             sError += 'Title,';
+         }
+         if (vTitle!="")
+         {
+            sHTML = sHTML+"<li>Title</li>"; 
+            document.getElementById('AddBookTitleSpan').innerHTML = "";
          }
          if (vAuthor=="")
          {
-            sHTML = sHTML+"<li>Author</li>";  
+            sHTML = sHTML+"<li>Author</li>"; 
+            document.getElementById('AddBookAuthorSpan').innerHTML = "<div class='balloonError'><p>Author is empty</p></div>";
             sError += 'Author,';
          } 
+         if (vAuthor!="")
+         {
+            sHTML = sHTML+"<li>Author</li>"; 
+            document.getElementById('AddBookAuthorSpan').innerHTML = "";
+         }         
          if (vGenre=="")
          {
-            sHTML = sHTML+"<li>Genre</li>";  
+            sHTML = sHTML+"<li>Genre</li>"; 
+            document.getElementById('AddBookGenreSpan').innerHTML = "<div class='balloonError'><p>Genre is empty</p></div>";
             sError += 'Genre,';
+         } 
+         if (vGenre!="")
+         {
+            sHTML = sHTML+"<li>Genre</li>"; 
+            document.getElementById('AddBookGenreSpan').innerHTML = "";
          } 
          if (vImage=="")
          {
             sHTML = sHTML+"<li>Image</li>"; 
+            document.getElementById('AddBookImageSpan').innerHTML = "<div class='balloonError'><p>Image is empty</p></div>";
+            sError += 'Image'; 
+         } 
+         if (vImage!="")
+         {
+            sHTML = sHTML+"<li>Image</li>"; 
+            document.getElementById('AddBookImageSpan').innerHTML = "";
             sError += 'Image'; 
          } 
          sHTML= sHTML+"</ul></div>";
          console.log(sError); 
-        spanElem.innerHTML= sHTML; 
+      //   spanElem.innerHTML= sHTML; 
         msg=sHTML;
         return false; 
     }
     else
     {  
       console.log("Add Book Form validated successfully"); 
+      return true;
+    }     
+}
+
+function validateEditBookData()
+{
+    
+    let vTitle = document.getElementById('EditBookTitle').value;
+    let vAuthor   = document.getElementById('EditBookAuthor').value;
+    let vGenre   = document.getElementById('EditBookGenre').value;    
+    let vImage   = document.getElementById('EditBookImage').value;
+   //  let spanElem= document.getElementById('EditBookAlertMsg');
+    let res="";
+    let sHTML="";
+    let sError="";
+    let msg ="";
+    console.log(`title ${vTitle}`);
+    if ((vTitle=="") ||(vAuthor=="")||(vGenre=="")||(vImage=="") )
+    {
+      console.log("Form validation Failed"); 
+        sError="Edit Book : Mandatory Field(s) are empty. "
+        sHTML = "<div style ='color:#ed2939;  '><p>Following mandatory field(s) are empty: </p> <ul>";
+        if (vTitle=="")
+         {
+            sHTML = sHTML+"<li>Title</li>";             
+            document.getElementById('EditBookTitleSpan').innerHTML = "<div class='balloonError'><p>Title is empty</p></div>";
+            sError += 'Title,';
+         }
+         if (vTitle!="")
+         {
+            sHTML = sHTML+"<li>Title</li>";             
+            document.getElementById('EditBookTitleSpan').innerHTML = "";
+         }
+         if (vAuthor=="")
+         {
+            sHTML = sHTML+"<li>Author</li>";  
+            document.getElementById('EditBookAuthorSpan').innerHTML = "<div class='balloonError'><p>Author is empty</p></div>";
+            sError += 'Author,';
+         }
+         if (vAuthor!="")
+         {
+            sHTML = sHTML+"<li>Author</li>";  
+            document.getElementById('EditBookAuthorSpan').innerHTML = "";
+         } 
+         if (vGenre=="")
+         {
+            sHTML = sHTML+"<li>Genre</li>";  
+            document.getElementById('EditBookGenreSpan').innerHTML = "<div class='balloonError'><p>Genre is empty</p></div>";
+            sError += 'Genre,';
+         } 
+         if (vGenre!="")
+         {
+            sHTML = sHTML+"<li>Genre</li>";  
+            document.getElementById('EditBookGenreSpan').innerHTML = "";
+         } 
+         sHTML= sHTML+"</ul></div>";
+         console.log(sError); 
+      //   spanElem.innerHTML= sHTML; 
+        msg=sHTML;
+        return false; 
+    }
+    else
+    {  
+      console.log("Edit Book Form validated successfully"); 
       return true;
     }     
 }
@@ -136,41 +248,156 @@ function validateAddAuthorData()
 }
 
 
+function validateEditAuthorData()
+{
+    
+    let vName          = document.getElementById('EditAuthorName').value;
+    let vNationality   = document.getElementById('EditAuthorNationality').value;
+    let vWorks         = document.getElementById('EditAuthorworks').value;    
+    let vImage         = document.getElementById('EditAuthorImage').value;
+   //  let spanElem       = document.getElementById('AddAuthorAlertMsg');
+    let res="";
+    let sHTML="";
+    let sError="";
+    let msg ="";
+    if ((vName=="") ||(vNationality=="")||(vWorks=="")||(vImage=="") )
+    {
+      console.log("Form validation Failed"); 
+        sError="Add Book : Mandatory Field(s) are empty. "
+        sHTML = "<div style ='color:#ed2939;  '><p>Following mandatory field(s) are empty: </p> <ul>";
+        if (vName=="")
+         {
+            sHTML = sHTML+"<li>Name</li>"; 
+            document.getElementById('EditAuthorNameSpan').innerHTML = "<div class='balloonError'><p>Author Name is empty</p></div>";
+            sError += 'Name,';
+         }
+         if (vName!="")
+         {
+            sHTML = sHTML+"<li>Name</li>"; 
+            document.getElementById('EditAuthorNameSpan').innerHTML = "";
+            sError += 'Name,';
+         }         
+         if (vNationality=="")
+         {
+            sHTML = sHTML+"<li>Nationality</li>"; 
+            document.getElementById('EditAuthorNationalitySpan').innerHTML = "<div class='balloonError'><p>Nationality is empty</p></div>";
+            sError += 'Nationality,';
+         } 
+         if (vNationality!="")
+         {
+            sHTML = sHTML+"<li>Nationality</li>"; 
+            document.getElementById('EditAuthorNationalitySpan').innerHTML = "";
+            sError += 'Nationality,';
+         } 
+         if (vWorks=="")
+         {
+            sHTML = sHTML+"<li>Works</li>"; 
+            document.getElementById('EditAuthorWorksSpan').innerHTML = "<div class='balloonError'><p>Works is empty</p></div>"; 
+            sError += 'Genre,';
+         } 
+         if (vWorks!="")
+         {
+            sHTML = sHTML+"<li>Works</li>"; 
+            document.getElementById('EditAuthorWorksSpan').innerHTML = ""; 
+            sError += 'Genre,';
+         } 
+         if (vImage=="")
+         {
+            sHTML = sHTML+"<li>Image</li>"; 
+            document.getElementById('EditAuthorEditBookImageSpan').innerHTML = "<div class='balloonError'><p>Image is empty</p></div>"; 
+            sError += 'Image'; 
+         } 
+         if (vImage!="")
+         {
+            sHTML = sHTML+"<li>Image</li>"; 
+            document.getElementById('EditAuthorEditBookImageSpan').innerHTML = ""; 
+            sError += 'Image'; 
+         } 
+         sHTML= sHTML+"</ul></div>";
+         console.log(sError); 
+      //   spanElem.innerHTML= sHTML; 
+        msg=sHTML;
+        return false; 
+    }
+    else
+    {  
+      console.log("Edit Author form validated successfully"); 
+      return true;
+    }     
+}
+
 function validateSignUpData()
 {
-   
-    let vUserName  = document.getElementById('SignUpUserName').value;
-    let vPwd       = document.getElementById('SignUpPassword').value;
-    let vEmailId   = document.getElementById('SignUpEmailId').value;
-    let vPhoneNo   = document.getElementById('phonenumber').value;
-    let spanElem= document.getElementById('SignUpAlertMsg');
+   console.log('validate sign up');
+ 
+   //  let vUserName  = document.getElementById('SignUpUserName').value;
+    let vPwd         = document.getElementById('SignUpPassword').value;
+    let vEmailId     = document.getElementById('SignUpEmailId').value;
+    let vPhoneNo     = document.getElementById('phonenumber').value;
+    let vfirstname   = document.getElementById('SignUpFirstName').value;
+    let vlastname    = document.getElementById('SignUpLastName').value;
+   //  let spanElem     = document.getElementById('SignUpAlertMsg');
     let res="";
     let sHTML="";
     let msg ="";
-    if ((vUserName=="") ||(vPwd=="") ||(vEmailId=="") ||(vPhoneNo==""))
+   //  console.log(`pwd : ${vPwd}, Email Id : ${vEmailId}, phone no : ${vPhoneNo}, first name : ${vfirstname}, last name : ${vlastname}`);
+    if ((vPwd=="") ||(vEmailId=="") ||(vPhoneNo=="") || (vfirstname=="") || (vlastname==""))
     {
         console.log("empty if"); 
         sHTML = "<div style ='color:#ed2939;  '><p>Authentication failed due to the following field(s) are empty</p> <ul>";
-        if (vUserName=="")
+        if (vEmailId=="")
          {
-            sHTML = sHTML+"<li>Username</li>"; 
+            sHTML = sHTML+"<li>Email Id</li>"; 
+            document.getElementById('SignUpEmailIdSpan').innerHTML = "<div class='balloonError'><p>Email is empty</p></div>";
+         }
+         if (vEmailId!="")
+         {
+            sHTML = sHTML+"<li>Email Id</li>"; 
+            document.getElementById('SignUpEmailIdSpan').innerHTML = "";
          }
          if (vPwd=="")
          {
             sHTML = sHTML+"<li>Password</li>";  
+            document.getElementById('SignUpPasswordSpan').innerHTML = "<div class='balloonError'><p>Password is empty</p></div>";
          } 
-         if (vEmailId=="")
+         if (vPwd!="")
          {
-            sHTML = sHTML+"<li>Email ID</li>";  
-         } 
+            sHTML = sHTML+"<li>Password</li>";  
+            document.getElementById('SignUpPasswordSpan').innerHTML = "";
+         }         
          if (vPhoneNo=="")
          {
             sHTML = sHTML+"<li>Phone No</li>";  
+            document.getElementById('PhoneNumberSpan').innerHTML = "<div class='balloonError'><p>Phone No is empty</p></div>";
+         } 
+         if (vPhoneNo!="")
+         {
+            sHTML = sHTML+"<li>Phone No</li>";  
+            document.getElementById('PhoneNumberSpan').innerHTML = "";
+         }          
+         if (vfirstname=="")
+         {
+            sHTML = sHTML+"<li>First Name</li>";  
+            document.getElementById('SignUpFirstNameSpan').innerHTML = "<div class='balloonError'><p>First Name is empty</p></div>";
+         } 
+         if (vfirstname!="")
+         {
+            sHTML = sHTML+"<li>First Name</li>";  
+            document.getElementById('SignUpFirstNameSpan').innerHTML = "";
+         } 
+         if (vlastname=="")
+         {
+            sHTML = sHTML+"<li>Last Name</li>";  
+            document.getElementById('SignUpLastNameSpan').innerHTML = "<div class='balloonError'><p>Last Name is empty</p></div>";
+         } 
+         if (vlastname!="")
+         {
+            sHTML = sHTML+"<li>Last Name</li>";  
+            document.getElementById('SignUpLastNameSpan').innerHTML = "";
          } 
          sHTML= sHTML+"</ul></div>";
          console.log(sHTML); 
-        spanElem.innerHTML= sHTML; 
-        msg=sHTML;
+      //   spanElem.innerHTML= sHTML; 
         return false; 
     }
     else
@@ -346,6 +573,7 @@ function validatePasswordStrength(elementId, SpanID, conext)///passing element a
 
 function validateSignUpForm()
 {  
+   console.log('validateSignUpForm');
   //  return true; 
        if ((validateSignUpData() && validateEmail('SignUpEmailId','SignUpEmailIdSpan') && validatePasswordStrength('SignUpPassword','SignUpPasswordSpan',1)   && validatePhone('phonenumber','PhoneNumberSpan' ))=== true)
       {

@@ -1,14 +1,33 @@
 const express = require('express');
 
+const Userdata = require('../modal/UserData');
+
 const loginRouter= express.Router();
-function router(nav, users, login, newbooks)
+function router(nav, users, login, newbooks, loginUser)
 {
-    loginRouter.get('/', function(req,res)
+
+  loginRouter.get('/', function(req,res)
     {
+      sess = req.session; 
+      var LoggedUser;
+      var loggedInFlag;
+      if (sess.loggedIn)
+      {loggedInFlag =sess.loggedIn}
+      else
+         {loggedInFlag =false;}
+      if (sess.loginuser)
+      {
+        LoggedUser = sess.loginuser;
+      }
+      else
+      {LoggedUser = loginUser;}
+    
         res.render('login', {
           nav , 
           title : 'Library',
-          login  
+          login,
+          LoggedUser,
+          loggedInFlag  
         });
         login.loginError = false;
         login.loginErrMessage ='';
@@ -16,24 +35,34 @@ function router(nav, users, login, newbooks)
 
     loginRouter.post('/validate', function(req,res)
     {
-        var user=req.body.username;
+        sess=req.session;
+        var user=req.body.emailid;
         var pwd =req.body.password;
+        var LoggedUser;
+        var loggedInFlag; 
         var validFlag = false;
         console.log(`login attempt with user : ${user} and password : ${pwd}`);
+        Userdata.find()
+        .then(function(users){
         for (var i=0; i< users.length; i++)
         {
-            if ((user===users[i].username) && (pwd===users[i].password)) 
+             if ((user===users[i].emailaddress) && (pwd===users[i].password)) 
             {
               validFlag= true;
-            }
+              LoggedUser = users[i];     
+              sess.loginuser = users[i];  
+              loggedInFlag =true; 
+              sess.loggedIn = true;           
+             }
         };
         if (validFlag)
           {
-            console.log(`login successful`);
             res.render('index', {
               nav , 
-              title : 'Library', 
-              newbooks               
+              title : 'Library' ,
+              newbooks , 
+              LoggedUser,
+              loggedInFlag
             });
           }
         else 
@@ -42,7 +71,8 @@ function router(nav, users, login, newbooks)
             login.loginError = true;
             login.loginErrMessage ='Authentication failed due to username and password';
             res.redirect('/login');
-          }         
+          }   
+        });       
     });
 
 
