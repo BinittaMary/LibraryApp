@@ -138,8 +138,10 @@
                   <img src="/images/<%=author.image%>" style="width: 15em; height: 10em;">
                 </div>                                                  
                 <div class="form-group col-md-11 d-grid p-3 text-center">
-                <button type="submit" class="btn btn-primary ">Update Author</button>
-              </div>
+                  <label for="UserConfirmation" class="form-label EditPage-label ">Do you want to update this author?&nbsp;</label> <br> 
+                  <button type="submit" class="btn btn-primary " name="save" value="Yes">Yes</button>
+                  <a href="/authors" id="cancel" name="cancel" class="btn btn-primary ">No</a>   
+                   </div>
               </div>
               </form>
             </div>
