@@ -139,7 +139,7 @@ function validateEditBookData()
     let vTitle = document.getElementById('EditBookTitle').value;
     let vAuthor   = document.getElementById('EditBookAuthor').value;
     let vGenre   = document.getElementById('EditBookGenre').value;    
-    let vImage   = document.getElementById('EditBookImage').value;
+    //let vImage   = document.getElementById('EditBookImage').value;
    //  let spanElem= document.getElementById('EditBookAlertMsg');
     let res="";
     let sHTML="";
@@ -265,7 +265,7 @@ function validateEditAuthorData()
     let vName          = document.getElementById('EditAuthorName').value;
     let vNationality   = document.getElementById('EditAuthorNationality').value;
     let vWorks         = document.getElementById('EditAuthorworks').value;    
-    let vImage         = document.getElementById('EditAuthorImage').value;
+   //  let vImage         = document.getElementById('EditAuthorImage').value;
    //  let spanElem       = document.getElementById('AddAuthorAlertMsg');
     let res="";
     let sHTML="";
@@ -312,18 +312,18 @@ function validateEditAuthorData()
             document.getElementById('EditAuthorWorksSpan').innerHTML = ""; 
             sError += 'Genre,';
          } 
-         if (vImage=="")
-         {
-            sHTML = sHTML+"<li>Image</li>"; 
-            document.getElementById('EditAuthorEditBookImageSpan').innerHTML = "<div class='balloonError'><p>Image is empty</p></div>"; 
-            sError += 'Image'; 
-         } 
-         if (vImage!="")
-         {
-            sHTML = sHTML+"<li>Image</li>"; 
-            document.getElementById('EditAuthorEditBookImageSpan').innerHTML = ""; 
-            sError += 'Image'; 
-         } 
+         // if (vImage=="")
+         // {
+         //    sHTML = sHTML+"<li>Image</li>"; 
+         //    document.getElementById('EditAuthorEditBookImageSpan').innerHTML = "<div class='balloonError'><p>Image is empty</p></div>"; 
+         //    sError += 'Image'; 
+         // } 
+         // if (vImage!="")
+         // {
+         //    sHTML = sHTML+"<li>Image</li>"; 
+         //    document.getElementById('EditAuthorEditBookImageSpan').innerHTML = ""; 
+         //    sError += 'Image'; 
+         // } 
          sHTML= sHTML+"</ul></div>";
          console.log(sError); 
       //   spanElem.innerHTML= sHTML; 

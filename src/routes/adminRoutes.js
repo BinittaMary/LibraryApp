@@ -111,11 +111,14 @@ function router(nav, books, newbooks, loginUser)
           }
           });
         var upload = multer({ storage : storage}).single('image');
+
         upload(req,res,function(err) {
             if(err) {
                 console.log("Error uploading file.");
             }
             console.log("File is uploaded");
+            console.log(req.body.title);
+            if(req.file){
             var bookItem = {
                 id     : req.body.id,
                 title  : req.body.title,
@@ -124,13 +127,25 @@ function router(nav, books, newbooks, loginUser)
                 description : '',
                 image  : req.file.filename,
             }
-            
             Bookdata.updateOne({_id : bookItem.id}, {title: bookItem.title, author: bookItem.author, genre :bookItem.genre,image : bookItem.image})
             .then(function(book){
                 console.log(`The book is updated : Title-  ${bookItem.title}, Author - ${bookItem.author}, Genre - ${bookItem.genre}, Image - ${bookItem.img}`);
                 res.redirect('/books');
-            });  
-
+            });
+            }
+            else{
+              var bookItem = {
+                id     : req.body.id,
+                title  : req.body.title,
+                author : req.body.author,
+                genre  : req.body.genre
+            }
+            Bookdata.updateOne({_id : bookItem.id}, {title: bookItem.title, author: bookItem.author, genre :bookItem.genre})
+            .then(function(book){
+                console.log(`The book is updated : Title-  ${bookItem.title}, Author - ${bookItem.author}, Genre - ${bookItem.genre}, Image - ${bookItem.img}`);
+                res.redirect('/books');
+            });
+            }      
         });
     });
 
@@ -279,12 +294,14 @@ function router(nav, books, newbooks, loginUser)
                 console.log("Error uploading file.");
             }
             console.log("File is uploaded");
+
+            if(req.file){
             var authorItem = {
                 id          : req.body.id,
                 authorname  : req.body.name,
                 nationality : req.body.nationality,
                 works       : req.body.works,
-                image       : req.file.filename,
+                image       : req.file.filename
             }
             
             Authordata.updateOne({_id : authorItem.id}, {authorname: authorItem.authorname, nationality: authorItem.nationality, works :authorItem.works,image : authorItem.image})
@@ -292,8 +309,22 @@ function router(nav, books, newbooks, loginUser)
                 console.log(`The book is updated : Title-  ${authorItem.authorname}, Author - ${authorItem.nationality}, Genre - ${authorItem.works}, Image - ${authorItem.image}`);
                 res.redirect('/authors');
             });  
-
-        });
+            }
+            else {
+                var authorItem = {
+                    id          : req.body.id,
+                    authorname  : req.body.name,
+                    nationality : req.body.nationality,
+                    works       : req.body.works
+                }
+                
+                Authordata.updateOne({_id : authorItem.id}, {authorname: authorItem.authorname, nationality: authorItem.nationality, works :authorItem.works})
+                .then(function(author){
+                    console.log(`The book is updated : Title-  ${authorItem.authorname}, Author - ${authorItem.nationality}, Genre - ${authorItem.works}`);
+                    res.redirect('/authors');
+                });  
+            } 
+        });     
     });
 
 

@@ -107,8 +107,18 @@
             <!-- sign in form -->
             <div class="col-lg-4  p-5 m-3 editPage-row rounded" style="background-color : #C5CAE9; ">
 
+              <!-- <form id        =  "uploadForm"
+              enctype   =  "multipart/form-data"
+              action    =  "/admin/editBook/edit"
+              method    =  "post"
+         >                 <label for="EditBookTitle" class="form-label EditPage-label ">Title&nbsp;<strong style="color: red;">*</strong></label>
+         <span id="EditBookTitleSpan"></span>
+         <input type="text" class="form-control"  id="EditBookTitle" name='title' placeholder="Enter the Book Title" value="<%=book.title%>">
 
-              <form class="row mt-5 " id ="EditBookForm" method="POST" onsubmit="return validateEditBookData() "  enctype=  "multipart/form-data" action="/admin/editBook/edit" >
+         <input type="file" name="image" />
+         <input type="submit" value="Upload Image" name="submit">
+         </form> -->
+              <form class="row mt-5 " id ="EditBookForm" method="post" onsubmit="return validateEditBookData()"   enctype=  "multipart/form-data" action="/admin/editBook/edit" >
                 <span id="EditBookAlertMsg"></span> 
                 <div class="form-group p-5 col-md-12 ">
                   <br>
@@ -147,6 +157,8 @@
             </div>
             <div class="col-lg-2"></div>
           </div>     
+
+          <!-- binitta -->
           
           <!--/stories-->
           <!-- <div class="row">    
