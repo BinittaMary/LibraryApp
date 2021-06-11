@@ -252,7 +252,7 @@ function validateAddAuthorData()
          if (vGenre=="")
          {
             sHTML = sHTML+"<li>Genre</li>";  
-            document.getElementById('AddAuthorGenreSpan').innerHTML = "<div class='balloonError'><p>Career is empty</p></div>"; 
+            document.getElementById('AddAuthorGenreSpan').innerHTML = "<div class='balloonError'><p>Works is empty</p></div>"; 
             sError += 'Genre,';
          } 
          if (vGenre!="")
