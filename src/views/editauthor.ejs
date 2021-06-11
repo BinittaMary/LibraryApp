@@ -100,12 +100,12 @@
     <div class="col-md-12"> 
       
       <div class="panel" >
-        <div class="panel-body" style="background-color: lightgray;">
+        <div class="panel-body" style="background: #9FA8DA;">
           
           <div class="row Login-container p-2 " >
             <div class="col-lg-4"></div>
             <!-- sign in form -->
-            <div class="col-lg-4  p-5 m-3 editPage-row rounded" style="background-color : #C5CAE9; ">
+            <div class="col-lg-4  p-5 m-3 EditPage-row rounded" style="background-color : #C5CAE9; ">
 
 
               <form class="row mt-5 " id ="EditAuthorForm" method="POST" onsubmit="return validateEditAuthorData() " enctype=  "multipart/form-data" action="/admin/editAuthor/edit" >
@@ -126,7 +126,12 @@
                   <label for="EditAuthorGenre" class="form-label EditPage-label ">Famous Works&nbsp;<strong style="color: red;">*</strong></label>
                   <span id="EditAuthorWorksSpan"></span>
                   <input type="text" class="form-control"  id="EditAuthorworks" name='works' placeholder="Enter the famous works" value="<%=author.works%>">
-                </div>                
+                </div>      
+                <div class="form-group p-5 col-md-12 ">
+                  <label for="editAuthorDesc" class="form-label addPage-label ">Career&nbsp;</label>
+                  <span id="editAuthorquoteSpan"></span>
+                  <textarea class="form-control" id="editquote" name="career" rows="3" ><%=author.career%></textarea>
+                </div>           
                 <div class="form-group p-5 col-md-12 ">
                   <label for="EditAuthorImage" class="form-label EditPage-label ">Image&nbsp;<strong style="color: red;">*</strong></label>
                   <span id="EditAuthorEditBookImageSpan"></span>

@@ -100,12 +100,12 @@
     <div class="col-md-12"> 
       
       <div class="panel" >
-        <div class="panel-body" style="background-color: lightgray;">
+        <div class="panel-body" style="background: #9FA8DA;">
           
           <div class="row Login-container p-2 " >
             <div class="col-lg-4"></div>
             <!-- sign in form -->
-            <div class="col-lg-4  p-5 m-3 editPage-row rounded" style="background-color : #C5CAE9; ">
+            <div class="col-lg-4  p-5 m-3 EditPage-row rounded" style="background-color : #C5CAE9; ">
 
               <!-- <form id        =  "uploadForm"
               enctype   =  "multipart/form-data"
@@ -136,7 +136,12 @@
                   <label for="EditBookGenre" class="form-label EditPage-label ">Genre&nbsp;<strong style="color: red;">*</strong></label>
                   <span id="EditBookGenreSpan"></span>
                   <input type="text" class="form-control"  id="EditBookGenre" name='genre' placeholder="Enter the Genre"  value="<%=book.genre%>">
-                </div>                
+                </div>   
+                <div class="form-group p-5 col-md-12 ">
+                  <label for="editBookdesc" class="form-label addPage-label ">Description&nbsp;</label>
+                  <span id="editBookDescSpan"></span>
+                  <textarea class="form-control" id="editBookdesc" rows="3" name='description' value="<%=book.description%>"><%=book.description%></textarea>
+                </div>              
                 <div class="form-group p-5 col-md-12 ">
                   <label for="EditBookImage" class="form-label EditPage-label ">Image&nbsp;</label>
                   <span id="EditBookImageSpan"></span>

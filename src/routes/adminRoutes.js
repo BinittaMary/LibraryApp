@@ -58,7 +58,7 @@ function router(nav, books, newbooks, loginUser)
                 title  : req.body.title,
                 author : req.body.author,
                 genre  : req.body.genre,
-                description : '',
+                description : req.body.description,
                 image  : req.file.filename,
                 newbook : 'Y'
             }
@@ -124,10 +124,10 @@ function router(nav, books, newbooks, loginUser)
                 title  : req.body.title,
                 author : req.body.author,
                 genre  : req.body.genre,
-                description : '',
+                description : req.body.description,
                 image  : req.file.filename,
             }
-            Bookdata.updateOne({_id : bookItem.id}, {title: bookItem.title, author: bookItem.author, genre :bookItem.genre,image : bookItem.image})
+            Bookdata.updateOne({_id : bookItem.id}, {title: bookItem.title, author: bookItem.author, genre :bookItem.genre,image : bookItem.image, description : bookItem.description})
             .then(function(book){
                 console.log(`The book is updated : Title-  ${bookItem.title}, Author - ${bookItem.author}, Genre - ${bookItem.genre}, Image - ${bookItem.img}`);
                 res.redirect('/books');
@@ -138,9 +138,10 @@ function router(nav, books, newbooks, loginUser)
                 id     : req.body.id,
                 title  : req.body.title,
                 author : req.body.author,
-                genre  : req.body.genre
+                genre  : req.body.genre,
+                description : req.body.description
             }
-            Bookdata.updateOne({_id : bookItem.id}, {title: bookItem.title, author: bookItem.author, genre :bookItem.genre})
+            Bookdata.updateOne({_id : bookItem.id}, {title: bookItem.title, author: bookItem.author, genre :bookItem.genre, description : bookItem.description})
             .then(function(book){
                 console.log(`The book is updated : Title-  ${bookItem.title}, Author - ${bookItem.author}, Genre - ${bookItem.genre}, Image - ${bookItem.img}`);
                 res.redirect('/books');
@@ -235,12 +236,13 @@ function router(nav, books, newbooks, loginUser)
                 authorname  : req.body.name,
                 nationality : req.body.nationality,
                 works       : req.body.works,
-                image       : req.file.filename,
+                career      : req.body.career,
+                image       : req.file.filename                
             }
             // authors.push(authorItem);
             var author= Authordata(authorItem);
             author.save();
-            console.log(`The new author to added is : Name-  ${authorItem.name}, Nationality - ${authorItem.nationality}, Genre - ${authorItem.genre}, Image - ${authorItem.image}`);
+            console.log(`The new author to added is : Name-  ${authorItem.name}, Nationality - ${authorItem.nationality}, Genre - ${authorItem.genre}, Quote - ${authorItem.career}, Image - ${authorItem.image}`);
             res.redirect('/authors');
         });
     });
@@ -301,10 +303,11 @@ function router(nav, books, newbooks, loginUser)
                 authorname  : req.body.name,
                 nationality : req.body.nationality,
                 works       : req.body.works,
+                career      : req.body.career,
                 image       : req.file.filename
             }
             
-            Authordata.updateOne({_id : authorItem.id}, {authorname: authorItem.authorname, nationality: authorItem.nationality, works :authorItem.works,image : authorItem.image})
+            Authordata.updateOne({_id : authorItem.id}, {authorname: authorItem.authorname, nationality: authorItem.nationality, works :authorItem.works,image : authorItem.image, career : authorItem.career})
             .then(function(author){
                 console.log(`The book is updated : Title-  ${authorItem.authorname}, Author - ${authorItem.nationality}, Genre - ${authorItem.works}, Image - ${authorItem.image}`);
                 res.redirect('/authors');
@@ -315,10 +318,11 @@ function router(nav, books, newbooks, loginUser)
                     id          : req.body.id,
                     authorname  : req.body.name,
                     nationality : req.body.nationality,
-                    works       : req.body.works
+                    works       : req.body.works,
+                    career      : req.body.career,
                 }
                 
-                Authordata.updateOne({_id : authorItem.id}, {authorname: authorItem.authorname, nationality: authorItem.nationality, works :authorItem.works})
+                Authordata.updateOne({_id : authorItem.id}, {authorname: authorItem.authorname, nationality: authorItem.nationality, works :authorItem.works, career : authorItem.career})
                 .then(function(author){
                     console.log(`The book is updated : Title-  ${authorItem.authorname}, Author - ${authorItem.nationality}, Genre - ${authorItem.works}`);
                     res.redirect('/authors');

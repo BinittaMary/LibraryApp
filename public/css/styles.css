@@ -213,12 +213,7 @@ a,a:hover {
     min-height: 660px;
 }
 
-.addPage-row
-{
-    /* background-color: #C5CAE9; */
-    height: 35em;
-    border :#283593 4px solid;
-}
+
 
 .addPage-label
 {
@@ -229,7 +224,7 @@ a,a:hover {
 .addPage-row
 {
     /* background-color: #C5CAE9; */
-    height: 40em;
+    height: 47em;
     border :#283593 4px solid;
 }
 
@@ -239,13 +234,6 @@ a,a:hover {
     /* font-family : cursive; */
 }
 
-
-.editPage-row
-{
-    /* background-color: #C5CAE9; */
-    height: 45em;
-    border :#283593 4px solid;
-}
 
 .EditPage-label
 {
@@ -256,7 +244,7 @@ a,a:hover {
 .EditPage-row
 {
     /* background-color: #C5CAE9; */
-    height: 35em;
+    height: 50 em;
     border :#283593 4px solid;
 }
 

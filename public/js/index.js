@@ -210,45 +210,73 @@ function validateEditBookData()
 
 function validateAddAuthorData()
 {
-    
+
     let vName          = document.getElementById('AddAuthorName').value;
     let vNationality   = document.getElementById('AddAuthorNationality').value;
-    let vGenre         = document.getElementById('AddAuthorGenre').value;    
+    let vGenre         = document.getElementById('AddAuthorGenre').value;
+   
     let vImage         = document.getElementById('AddAuthorImage').value;
-    let spanElem       = document.getElementById('AddAuthorAlertMsg');
+
+   //  let spanElem       = document.getElementById('AddAuthorAlertMsg');
     let res="";
     let sHTML="";
     let sError="";
-    let msg ="";
     if ((vName=="") ||(vNationality=="")||(vGenre=="")||(vImage=="") )
     {
       console.log("Form validation Failed"); 
         sError="Add Book : Mandatory Field(s) are empty. "
-        sHTML = "<div style ='color:#ed2939;  '><p>Following mandatory field(s) are empty: </p> <ul>";
         if (vName=="")
          {
             sHTML = sHTML+"<li>Name</li>"; 
+            document.getElementById('AddAuthorNameSpan').innerHTML = "<div class='balloonError'><p>Author Name is empty</p></div>";
+            sError += 'Name,';
+         }
+         if (vName!="")
+         {
+            sHTML = sHTML+"<li>Name</li>"; 
+            document.getElementById('AddAuthorNameSpan').innerHTML = "";
             sError += 'Name,';
          }
          if (vNationality=="")
          {
-            sHTML = sHTML+"<li>Nationality</li>";  
+            sHTML = sHTML+"<li>Nationality</li>"; 
+            document.getElementById('AddAuthorNationalitySpan').innerHTML = "<div class='balloonError'><p>Nationality is empty</p></div>"; 
+            sError += 'Nationality,';
+         } 
+         if (vNationality!="")
+         {
+            sHTML = sHTML+"<li>Nationality</li>"; 
+            document.getElementById('AddAuthorNationalitySpan').innerHTML = ""; 
             sError += 'Nationality,';
          } 
          if (vGenre=="")
          {
             sHTML = sHTML+"<li>Genre</li>";  
+            document.getElementById('AddAuthorGenreSpan').innerHTML = "<div class='balloonError'><p>Career is empty</p></div>"; 
+            sError += 'Genre,';
+         } 
+         if (vGenre!="")
+         {
+            sHTML = sHTML+"<li>Genre</li>";  
+            document.getElementById('AddAuthorGenreSpan').innerHTML = ""; 
             sError += 'Genre,';
          } 
          if (vImage=="")
          {
             sHTML = sHTML+"<li>Image</li>"; 
+            document.getElementById('AddAuthorAddBookImageSpan').innerHTML = "<div class='balloonError'><p>Image is empty</p></div>";
+            sError += 'Image'; 
+         } 
+         if (vImage!="")
+         {
+            sHTML = sHTML+"<li>Image</li>"; 
+            document.getElementById('AddAuthorAddBookImageSpan').innerHTML = "<div class='balloonError'><p>Image is empty</p></div>";
+
             sError += 'Image'; 
          } 
          sHTML= sHTML+"</ul></div>";
          console.log(sError); 
-        spanElem.innerHTML= sHTML; 
-        msg=sHTML;
+      //   spanElem.innerHTML= sHTML; 
         return false; 
     }
     else

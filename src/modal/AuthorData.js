@@ -12,7 +12,8 @@ const AuthorSchema = new Schema({
     authorname       : String,
     nationality      : String,
     works            : String,
-    image            : String
+    image            : String,
+    career           : String
 });
 
 var Authordata = mongoose.model('authordata',AuthorSchema);

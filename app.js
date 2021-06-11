@@ -155,7 +155,6 @@ const adminRouter = require('./src/routes/adminRoutes')(nav, books, newbooks, lo
 
 const signupRouter = require('./src/routes/signupRoutes')(nav, users, signup, loginUser);
 
-const editBookpRouter = require('./src/routes/editBookRoutes')(nav, books, newbooks, loginUser);
 
 
 const Userdata = require('./src/modal/UserData');
@@ -184,7 +183,7 @@ app.use('/login',loginRouter);
 app.use('/signup',signupRouter);
 //*** router for addbook */
 app.use('/admin', adminRouter);
-app.use('/editDemo', editBookpRouter);
+
 
 
 //*** router for express-session */
