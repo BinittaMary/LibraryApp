@@ -110,7 +110,7 @@
 
               <form class="row mt-5 " id ="LoginForm" method="POST" onsubmit="return validateLoginForm()" action='/login/validate'>
                 <%if (login.loginError) {%>
-                  <span id="LoginAlertMsg"><div style ='color:#ed2939;  padding:5px; '><p><%=login.loginErrMessage%></p> </span> 
+                  <span id="LoginAlertMsg"><div style ='color:#ed2939;  padding:5px; text-align: center; font-family : cursive;'><p><%=login.loginErrMessage%></p></div> </span> 
                 <%} else {%>
                   <span id="LoginAlertMsg"></span> 
                   <%}%>

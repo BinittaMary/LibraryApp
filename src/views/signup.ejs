@@ -109,7 +109,7 @@
 
               <form class="row mt-5 " id ="SignUpForm" method="POST" onsubmit="return validateSignUpData()" action="/signup/adduser">
                 <%if (signup.signupError) {%>   
-                  <span id="SignUpAlertMsg"><div ><p style="color: #ed2939;text-align: center; padding:5px;"><%=signup.signupErrMessage%></p></div> </span> 
+                  <span id="SignUpAlertMsg"><div ><p style ='color:#ed2939;  padding:5px; text-align: center; font-family : cursive;'><%=signup.signupErrMessage%></p></div> </span> 
                 <%} else {%>
                   <span id="SignUpAlertMsg"></span> 
                   <%}%>

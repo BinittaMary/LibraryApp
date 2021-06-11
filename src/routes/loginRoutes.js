@@ -73,7 +73,7 @@ function router(nav, users, login, newbooks, loginUser)
           {
             console.log(`login failed`);
             login.loginError = true;
-            login.loginErrMessage ='Authentication failed due to username and password';
+            login.loginErrMessage ='Authentication failed due to invalid username and password';
             res.redirect('/login');
           }   
         });       
