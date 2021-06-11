@@ -3,7 +3,7 @@ const express = require('express');
 const Bookdata = require('../modal/BookData');
 
 const booksRouter= express.Router();
-function router(nav, loginUser)
+function router(nav, loginUser, addalert)
 {
 
     booksRouter.get('/', function(req,res)    
@@ -30,8 +30,12 @@ function router(nav, loginUser)
                 title : 'Library',
                 books,
                 LoggedUser,
-                loggedInFlag  
+                loggedInFlag,
+                addalert  
                 });
+            addalert.addedFlag = false;
+            addalert.addMessage= ''
+    
         });
 
     });

@@ -3,7 +3,7 @@ const express = require('express');
 const Authordata = require('../modal/AuthorData');
 
 const authorsRouter= express.Router();
-function router(nav, loginUser)
+function router(nav, loginUser, addalert)
 {
 
     authorsRouter.get('/', function(req,res)
@@ -28,9 +28,11 @@ function router(nav, loginUser)
             title : 'Library',
             authors,
             LoggedUser,
-            loggedInFlag     
+            loggedInFlag,
+            addalert 
             });
-    
+      addalert.addedFlag = false;
+      addalert.addMessage= ''
        })
 
     });

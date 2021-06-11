@@ -101,6 +101,12 @@ let login =
     loginErrMessage : ''
   };
 
+  let addalert =  
+  {
+    addedFlag : false,
+    addMessage : ''
+  };
+
   let signup =  
   {
     signupError : false,
@@ -144,13 +150,13 @@ let adminlogged =false;
 
 let sess;
 
-const booksRouter = require('./src/routes/bookRoutes')(nav, loginUser);
+const booksRouter = require('./src/routes/bookRoutes')(nav, loginUser, addalert);
 
-const authorsRouter = require('./src/routes/authorRoutes')(nav, loginUser);
+const authorsRouter = require('./src/routes/authorRoutes')(nav, loginUser, addalert);
 
 const loginRouter = require('./src/routes/loginRoutes')(nav, users, login, newbooks, loginUser);
 
-const adminRouter = require('./src/routes/adminRoutes')(nav, books, newbooks, loginUser);
+const adminRouter = require('./src/routes/adminRoutes')(nav, books, newbooks, loginUser, addalert);
 
 
 const signupRouter = require('./src/routes/signupRoutes')(nav, users, signup, loginUser);

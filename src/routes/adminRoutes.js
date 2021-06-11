@@ -8,7 +8,7 @@ const adminRouter = express.Router();
 
 
 
-function router(nav, books, newbooks, loginUser)
+function router(nav, books, newbooks, loginUser, addalert)
 {
    /*** add book page */
 
@@ -66,6 +66,8 @@ function router(nav, books, newbooks, loginUser)
             book.save();
 
             console.log(`The new book to added is : Title-  ${bookItem.title}, Author - ${bookItem.author}, Genre - ${bookItem.genre}, Image - ${bookItem.img}`);
+            addalert.addedFlag = true;
+            addalert.addMessage= `The book ${bookItem.title} is added!!`
             res.redirect('/books');
         });
     });
@@ -130,6 +132,8 @@ function router(nav, books, newbooks, loginUser)
             Bookdata.updateOne({_id : bookItem.id}, {title: bookItem.title, author: bookItem.author, genre :bookItem.genre,image : bookItem.image, description : bookItem.description})
             .then(function(book){
                 console.log(`The book is updated : Title-  ${bookItem.title}, Author - ${bookItem.author}, Genre - ${bookItem.genre}, Image - ${bookItem.img}`);
+                addalert.addedFlag = true;
+                addalert.addMessage= `The book ${bookItem.title} is updated!!`
                 res.redirect('/books');
             });
             }
@@ -144,6 +148,8 @@ function router(nav, books, newbooks, loginUser)
             Bookdata.updateOne({_id : bookItem.id}, {title: bookItem.title, author: bookItem.author, genre :bookItem.genre, description : bookItem.description})
             .then(function(book){
                 console.log(`The book is updated : Title-  ${bookItem.title}, Author - ${bookItem.author}, Genre - ${bookItem.genre}, Image - ${bookItem.img}`);
+                addalert.addedFlag = true;
+                addalert.addMessage= `The book ${bookItem.title} is updated!!`
                 res.redirect('/books');
             });
             }      
@@ -183,9 +189,12 @@ function router(nav, books, newbooks, loginUser)
     /*** delete page action */
     adminRouter.post('/deletebook/delete', function(req,res){
         const id =req.body.id;
+        const title =req.body.title;
         Bookdata.deleteOne({'_id' : id})
         .then(function(book){
             console.log(`The book is deleted : ID -  ${id}`);
+            addalert.addedFlag = true;
+            addalert.addMessage= `The book ${title} is deleted!!`
             res.redirect('/books');
         });
  
@@ -243,6 +252,8 @@ function router(nav, books, newbooks, loginUser)
             var author= Authordata(authorItem);
             author.save();
             console.log(`The new author to added is : Name-  ${authorItem.name}, Nationality - ${authorItem.nationality}, Genre - ${authorItem.genre}, Quote - ${authorItem.career}, Image - ${authorItem.image}`);
+            addalert.addedFlag = true;
+            addalert.addMessage= `The author ${authorItem.authorname} is added!!`
             res.redirect('/authors');
         });
     });
@@ -310,6 +321,8 @@ function router(nav, books, newbooks, loginUser)
             Authordata.updateOne({_id : authorItem.id}, {authorname: authorItem.authorname, nationality: authorItem.nationality, works :authorItem.works,image : authorItem.image, career : authorItem.career})
             .then(function(author){
                 console.log(`The book is updated : Title-  ${authorItem.authorname}, Author - ${authorItem.nationality}, Genre - ${authorItem.works}, Image - ${authorItem.image}`);
+                addalert.addedFlag = true;
+                addalert.addMessage= `The author ${authorItem.authorname} is updated!!`
                 res.redirect('/authors');
             });  
             }
@@ -325,6 +338,8 @@ function router(nav, books, newbooks, loginUser)
                 Authordata.updateOne({_id : authorItem.id}, {authorname: authorItem.authorname, nationality: authorItem.nationality, works :authorItem.works, career : authorItem.career})
                 .then(function(author){
                     console.log(`The book is updated : Title-  ${authorItem.authorname}, Author - ${authorItem.nationality}, Genre - ${authorItem.works}`);
+                    addalert.addedFlag = true;
+                    addalert.addMessage= `The author ${authorItem.authorname} is updated!!`
                     res.redirect('/authors');
                 });  
             } 
@@ -363,9 +378,12 @@ function router(nav, books, newbooks, loginUser)
     /*** delete page action */
     adminRouter.post('/deleteAuthor/delete', function(req,res){
         const id =req.body.id;
+        const authorname =req.body.authorname;
         Authordata.deleteOne({'_id' : id})
         .then(function(author){
             console.log(`The Author is deleted : ID -  ${id}`);
+            addalert.addedFlag = true;
+            addalert.addMessage= `The author ${authorname} is deleted!!`
             res.redirect('/authors');
         });
  
