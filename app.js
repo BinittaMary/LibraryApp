@@ -146,6 +146,8 @@ let loginUser = {
 
 let loggedIn  = false;
 
+let abcd;
+
 let adminlogged =false;
 
 let sess;
